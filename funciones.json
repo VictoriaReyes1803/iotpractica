@@ -1,0 +1,110 @@
+[
+    {
+        "arreglo": [],
+        "nf": 0,
+        "hora_inicio": "18:00",
+        "duracion": "2 horas",
+        "tipo_proyeccion": "Digital",
+        "precio_entrada": 10.5,
+        "pelicula": "Spider-Man: No Way Home"
+    },
+    {
+        "arreglo": [],
+        "nf": 1,
+        "hora_inicio": "20:30",
+        "duracion": "2.5 horas",
+        "tipo_proyeccion": "IMAX",
+        "precio_entrada": 15.0,
+        "pelicula": "Gwen Stacy: Into the Spider-Verse"
+    },
+    {
+        "arreglo": [],
+        "nf": 2,
+        "hora_inicio": "20:40",
+        "duracion": "2 horas y 15 min",
+        "tipo_proyeccion": "IMAX",
+        "precio_entrada": 250.0,
+        "pelicula": "Gwen Stacy:Into the Spider-Verse"
+    },
+    {
+        "arreglo": [],
+        "nf": 3,
+        "hora_inicio": "11:11",
+        "duracion": "120",
+        "tipo_proyeccion": "3D",
+        "precio_entrada": 300.0,
+        "pelicula": "Oswaldo y Victoria"
+    },
+    {
+        "arreglo": [],
+        "nf": 4,
+        "hora_inicio": "111",
+        "duracion": "11",
+        "tipo_proyeccion": "11",
+        "precio_entrada": 11.0,
+        "pelicula": "11"
+    },
+    {
+        "arreglo": [],
+        "nf": 6,
+        "hora_inicio": "33",
+        "duracion": "33",
+        "tipo_proyeccion": "33",
+        "precio_entrada": 33.0,
+        "pelicula": "33"
+    },
+    {
+        "arreglo": [],
+        "nf": 6,
+        "hora_inicio": "22",
+        "duracion": "22",
+        "tipo_proyeccion": "22",
+        "precio_entrada": 22.0,
+        "pelicula": "22"
+    },
+    {
+        "arreglo": [],
+        "nf": 7,
+        "hora_inicio": "1",
+        "duracion": "1",
+        "tipo_proyeccion": "1",
+        "precio_entrada": 1.0,
+        "pelicula": "1"
+    },
+    {
+        "arreglo": [],
+        "nf": 8,
+        "hora_inicio": "11",
+        "duracion": "11",
+        "tipo_proyeccion": "11",
+        "precio_entrada": 11.0,
+        "pelicula": "11"
+    },
+    {
+        "arreglo": [],
+        "nf": 9,
+        "hora_inicio": "22",
+        "duracion": "22",
+        "tipo_proyeccion": "22",
+        "precio_entrada": 22.0,
+        "pelicula": "22"
+    },
+    {
+        "arreglo": [],
+        "nf": 10,
+        "hora_inicio": "22",
+        "duracion": "22",
+        "tipo_proyeccion": "22",
+        "precio_entrada": 22.0,
+        "pelicula": "22"
+    },
+    {
+        "arreglo": [],
+        "nf": 11,
+        "hora_inicio": "33",
+        "duracion": "33",
+        "tipo_proyeccion": "33",
+        "precio_entrada": 33.0,
+        "pelicula": "33"
+    }
+]

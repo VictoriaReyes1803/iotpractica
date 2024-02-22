@@ -1,0 +1,120 @@
+[
+    {
+        "arreglo": [],
+        "numero_sala": 1,
+        "capacidad": 50,
+        "formato_pantalla": "3D",
+        "sonido": "Dolby Atmos",
+        "tipo": "VIP",
+        "funciones": [
+            {
+                "nf": 1,
+                "hora_inicio": "18:00",
+                "duracion": "2 horas",
+                "tipo_proyeccion": "Digital",
+                "precio_entrada": 10.5,
+                "pelicula": "Spider-Man: No Way Home"
+            }
+        ]
+    },
+    {
+        "arreglo": [],
+        "numero_sala": 11,
+        "capacidad": "11",
+        "formato_pantalla": "11",
+        "sonido": "11",
+        "tipo": [
+            {
+                "arreglo": [],
+                "nf": 1,
+                "hora_inicio": "20:30",
+                "duracion": "2.5 horas",
+                "tipo_proyeccion": "IMAX",
+                "precio_entrada": 15.0,
+                "pelicula": "Gwen Stacy: Into the Spider-Verse"
+            },
+            {
+                "arreglo": [],
+                "nf": 2,
+                "hora_inicio": "20:30",
+                "duracion": "2.5 horas",
+                "tipo_proyeccion": "IMAX",
+                "precio_entrada": 15.0,
+                "pelicula": "Gwen Stacy: Into the Spider-Verse"
+            }
+        ],
+        "funciones": []
+    },
+    {
+        "arreglo": [],
+        "numero_sala": 3,
+        "capacidad": 3,
+        "formato_pantalla": "33",
+        "sonido": "33",
+        "tipo": "33",
+        "funciones": [
+            {
+                "nf": 0,
+                "hora_inicio": "33",
+                "duracion": "33",
+                "tipo_proyeccion": "33",
+                "precio_entrada": 33.0,
+                "pelicula": "33"
+            }
+        ]
+    },
+    {
+        "arreglo": [],
+        "numero_sala": "22",
+        "capacidad": 22,
+        "formato_pantalla": "22",
+        "sonido": "22",
+        "tipo": "22",
+        "funciones": [
+            {
+                "nf": 0,
+                "hora_inicio": "22",
+                "duracion": "22",
+                "tipo_proyeccion": "22",
+                "precio_entrada": 22.0,
+                "pelicula": "22"
+            }
+        ]
+    },
+    {
+        "arreglo": [],
+        "numero_sala": "1",
+        "capacidad": 1,
+        "formato_pantalla": "1",
+        "sonido": "1",
+        "tipo": "1",
+        "funciones": [
+            {
+                "nf": 0,
+                "hora_inicio": "1",
+                "duracion": "1",
+                "tipo_proyeccion": "1",
+                "precio_entrada": 1.0,
+                "pelicula": "1"
+            }
+        ]
+    },
+    {
+        "arreglo": [],
+        "numero_sala": "11",
+        "capacidad": 11,
+        "formato_pantalla": "11",
+        "sonido": "11",
+        "tipo": "11",
+        "funciones": [
+            {
+                "nf": 0,
+                "hora_inicio": "11",
+                "duracion": "11",
+                "tipo_proyeccion": "11",
+                "precio_entrada": 11.0,
+                "pelicula": "11"
+            }
+        ]
+    }
+]
