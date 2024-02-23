@@ -1,9 +1,10 @@
 from pymongo import MongoClient
+from pymongo.server_api import ServerApi
 
 class Mongo:
     def __init__(self, conexion=None, db=None):
         if conexion is None:
-            self.conexion = "mongodb+srv://myAtlasDBUser:280304Da@myatlasclusteredu.ino9cmx.mongodb.net/"
+            self.conexion = "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
         else:
             self.conexion = conexion
         self.db = db
@@ -49,13 +50,14 @@ class Mongo:
 if __name__ == '__main__':
     mongo = Mongo(db="Iot_db")
     nueva_funcion = {
-        "numero_funcion": 2,
+        "nf": 4,
         "hora_inicio": "13:00",
         "duracion": ":00 horas",
         "tipo_proyeccion": "imax",
         "precio_entrada": 12.0,
-        "pelicula": "jj"
+        "pelicula": "El señor de los anillos",
     }
+ 
     mongo.insert_one("Funciones", nueva_funcion)
     resultados = mongo.find("Funciones")
     print("Funciones encontradas:", resultados)

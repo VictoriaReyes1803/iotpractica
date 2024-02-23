@@ -38,21 +38,28 @@ class fun():
     def ver_funciones(self):
         if self.funciones:
             print("\nLista de funciones:")
+            for funcion in self.funciones.arreglo:
+                    print(f"\nNo. Funcion {funcion.nf} - Hora de inicio: {funcion.hora_inicio} - Duracion: {funcion.duracion}")
+                    print(f"Tipo: {funcion.tipo_proyeccion}")
+                    print(f"Precio: {funcion.precio_entrada}")
+                    print(f"Pelicula: {funcion.pelicula}")
+
+            print("\n")
             self.funciones.ver()
         else:
             print("Error: No se han cargado las funciones.")
 
 
     def modificar_funcion(self):
-        self.funciones.ver()
+        self.ver_funciones()
         indice = int(input("Ingrese el índice de la función a modificar: "))
         if 0 <= indice < len(self.funciones.arreglo):
-            nueva_hora_inicio = input("Nueva hora de inicio: ")
-            nueva_duracion = input("Nueva duración: ")
-            nuevo_tipo_proyeccion = input("Nuevo tipo de proyección: ")
-            nuevo_precio_entrada = float(input("Nuevo precio de entrada: "))
-            nueva_pelicula = input("Nuevo nombre de la película: ")
-            indice_actual = len(self.funciones.arreglo)
+            nueva_hora_inicio = input("Nueva hora de inicio: ") if input("Desea modificar la hora de inicio? (s/n): ") == "s" else self.funciones.arreglo[indice].hora_inicio
+            nueva_duracion = input("Nueva duración: ") if input("Desea modificar la duración? (s/n): ") == "s" else self.funciones.arreglo[indice].duracion
+            nuevo_tipo_proyeccion = input("Nuevo tipo de proyección: ") if input("Desea modificar el tipo de proyección? (s/n): ") == "s" else self.funciones.arreglo[indice].tipo_proyeccion
+            nuevo_precio_entrada = float(input("Nuevo precio de entrada: ")) if input("Desea modificar el precio de entrada? (s/n): ") == "s" else self.funciones.arreglo[indice].precio_entrada
+            nueva_pelicula = input("Nuevo nombre de la película: ") if input("Desea modificar el nombre de la película? (s/n): ") == "s" else self.funciones.arreglo[indice].pelicula
+            indice_actual = indice
 
             nueva_funcion = Funciones(nf= indice_actual,hora_inicio=nueva_hora_inicio, duracion=nueva_duracion,
                                       tipo_proyeccion=nuevo_tipo_proyeccion, precio_entrada=nuevo_precio_entrada,
@@ -68,8 +75,9 @@ class fun():
 
     def eliminar_funcion(self):
         indice = int(input("Ingrese el índice de la función a eliminar: "))
-        if 0 <= indice < len(self.funciones.arreglo):
+        if 0 < indice < len(self.funciones.arreglo):
             self.funciones.eliminar(indice)
+            self.funciones.nf = len(self.funciones.arreglo)
             if self.banderaguardar:
                 self.funciones.guardar_en_archivo("funciones.json")
             print(f"\nFunción eliminada exitosamente!\n")
@@ -81,8 +89,8 @@ class fun():
     def consola(self):
         while True:
             print("Menú de funciones:")
-            print("1. Agregar función")
-            print("2. Ver funciones")
+            print("1. Ver funciones")
+            print("2. Agregar función")
             print("3. Modificar función")
             print("4. Eliminar función")
             print("5. Salir")

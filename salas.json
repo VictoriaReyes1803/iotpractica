@@ -19,13 +19,13 @@
     },
     {
         "arreglo": [],
-        "numero_sala": 11,
+        "numero_sala": 1,
         "capacidad": "11",
         "formato_pantalla": "11",
         "sonido": "11",
-        "tipo": [
+        "tipo": "3D",
+        "funciones": [
             {
-                "arreglo": [],
                 "nf": 1,
                 "hora_inicio": "20:30",
                 "duracion": "2.5 horas",
@@ -34,16 +34,14 @@
                 "pelicula": "Gwen Stacy: Into the Spider-Verse"
             },
             {
-                "arreglo": [],
-                "nf": 2,
+                "nf": 1,
                 "hora_inicio": "20:30",
-                "duracion": "2.5 horas",
+                "duracion": "5",
                 "tipo_proyeccion": "IMAX",
                 "precio_entrada": 15.0,
                 "pelicula": "Gwen Stacy: Into the Spider-Verse"
             }
-        ],
-        "funciones": []
+        ]
     },
     {
         "arreglo": [],
@@ -65,11 +63,11 @@
     },
     {
         "arreglo": [],
-        "numero_sala": "22",
-        "capacidad": 22,
-        "formato_pantalla": "22",
-        "sonido": "22",
-        "tipo": "22",
+        "numero_sala": 33,
+        "capacidad": "33",
+        "formato_pantalla": "33",
+        "sonido": "33",
+        "tipo": "3D",
         "funciones": [
             {
                 "nf": 0,

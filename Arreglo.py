@@ -12,8 +12,10 @@ class Arreglo:
             else:
               
                 nf = len(self.arreglo)
+                num = len(self.arreglo)
+                numero_sala = len(self.arreglo)
                 self.arreglo.append(instancia)
-                return True,nf
+                return True,nf,num,numero_sala
 
     def modificar(self, indice, instancia):
         if 0 <= indice < len(self.arreglo):

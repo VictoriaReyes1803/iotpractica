@@ -19,9 +19,9 @@ class Cin:
     def mostrar_menu(self):
         print("\nMenu:")
         print("1. Ver lista de cines")
-        print("2. Agregar un nuevo cine")
-        print("3. Modificar un cine existente")
-        print("4. Eliminar un cine existente")
+        print("2. Agregar un cine")
+        print("3. Modificar un cine")
+        print("4. Eliminar un cine")
         print("5. Salir")
 
 
@@ -77,18 +77,48 @@ class Cin:
 
 
     def modificar_cine(self):
-        indice = int(input("Ingrese el índice del cine a modificar: "))
-        if 0 <= indice < len(self.cines.arreglo):
-            nombre = input("Ingrese el nuevo nombre del cine: ")
-            ubi = input("Ingrese la nueva ubicación del cine: ")
-            capacidad = int(input("Ingrese la nueva capacidad del cine: "))
-            numero_salas = int(input("Ingrese el nuevo número de salas del cine: "))
-            clasificacion = input("Ingrese la nueva clasificación del cine: ")
-            cine = Cines(nombre=nombre, ubi=ubi, capacidad=capacidad, numero_salas=numero_salas, clasificacion=clasificacion)
-            self.cines.modificar(indice, cine)
-            print("Cine modificado exitosamente.")
+        if []== self.cines.arreglo:
+            print('No hay salas\n')
         else:
-            print("Índice fuera de rango. Intente nuevamente.")
+            self.mostrar_lista_cines()
+            indice = int(input("Ingrese el índice del cine a modificar: "))
+            if 0 <= indice < len(self.cines.arreglo):
+                nuevo_nombre = input("Ingrese el nuevo nombre del cine: ") if input("Desea modificar el nombre? (s/n): ") == "s" else self.cines.arreglo[indice].nombre
+                nueva_ubi = input("Ingrese la nueva ubicación del cine: ") if input("Desea modificar la ubicación? (s/n): ") == "s" else self.cines.arreglo[indice].ubi
+                nueva_capacidad = int(input("Ingrese la nueva capacidad del cine: ")) if input("Desea modificar la capacidad? (s/n): ") == "s" else self.cines.arreglo[indice].capacidad
+                nuevo_numero_salas = int(input("Ingrese el nuevo número de salas del cine: ")) if input("Desea modificar el número de salas? (s/n): ") == "s" else self.cines.arreglo[indice].numero_salas
+                nueva_clasificacion = input("Ingrese la nueva clasificación del cine: ") if input("Desea modificar la clasificación? (s/n): ") == "s" else self.cines.arreglo[indice].clasificacion
+                num_cine = indice 
+                cine_modificar = self.cines.arreglo[indice]
+
+                salass = Salas()
+                for sala in cine_modificar.salas.arreglo:
+                    salass.agregar(sala)
+                
+                print("salass:")
+                for sala in salass.arreglo:
+                    print(sala)
+
+                cine = Cines(num_cine,nuevo_nombre, nueva_ubi, nueva_capacidad, nuevo_numero_salas, nueva_clasificacion, salass)
+                bool = self.cines.modificar(indice, cine)
+                print (cine)
+
+                if self.banderaguardar:
+                    self.cines.guardar_a_json("archivo.json");
+
+                if bool:
+                    print("Cine modificado exitosamente.")
+                    modifica_salas = input("¿Desea modificar una sala? (s/n): ")
+                    if modifica_salas.lower() == "s":
+                        sal = Sal(salass)
+                        sal.ciclo_menu_salas()
+                        cine.salas = sal.salas
+
+                        if self.banderaguardar:
+                            self.cines.guardar_a_json("archivo.json");
+                    return cine
+            else:
+                print("Índice fuera de rango. Intente nuevamente.")
 
 
 
@@ -96,6 +126,9 @@ class Cin:
         indice = int(input("Ingrese el índice del cine a eliminar: "))
         if 0 <= indice < len(self.cines.arreglo):
             self.cines.eliminar(indice)
+            if self.banderaguardar:
+                self.cines.guardar_a_json("archivo.json");
+        
             print("Cine eliminado exitosamente.")
         else:
             print("Índice fuera de rango. Intente nuevamente.")

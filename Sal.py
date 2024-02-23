@@ -20,6 +20,7 @@ class Sal():
             print(f"Formato de pantalla: {sala.formato_pantalla}")
             print(f"Sistema de sonido: {sala.sonido}")
             print(f"Tipo de sala: {sala.tipo}")
+            print(f"Funciones: {sala.funciones}")
 
             if sala.funciones.arreglo:
                 print("\nFunciones:")
@@ -38,14 +39,15 @@ class Sal():
             opcion = int(input("Opción: "))
 
             if opcion == 1:
-                self.agregar_sala()
-            elif opcion == 2:
                 self.ver_salas()
+                
+            elif opcion == 2:
+                self.agregar_sala()
             elif opcion == 3:
-                self.eliminar_sala()
-            elif opcion == 4:
                 self.modificar_sala()
-            elif opcion == 6:
+            elif opcion == 4:
+                self.eliminar_sala()
+            elif opcion == 5:
                 print('Hasta Luego\n')
                 break
             else:
@@ -54,11 +56,11 @@ class Sal():
 
     def menu_salas(self):
         print("Menú salas:")
-        print("1. Agregar")
-        print("2. Ver")
-        print("3. Eliminar")
-        print("4. Modificar")
-        print("6. salir")
+        print("1. Ver")
+        print("2. Agregar")
+        print("3. Modificar")
+        print("4. Eliminar")
+        print("5. salir")
 
     def agregar_sala(self):
         print("Ingrese los detalles de la nueva Sala:")
@@ -67,7 +69,7 @@ class Sal():
         formato_pantalla = input("Formato de pantalla: ")
         sonido = input("Sistema de sonido: ")
         tipo = input("Tipo de sala: ")
-        numero_sala =  input("Tipo de sala: ")
+        numero_sala =  len(self.salas.arreglo) + 1
 
         funciones = Funciones()
         Fun = fun(funciones)
@@ -106,33 +108,39 @@ class Sal():
             print('No hay salas\n')
         else:
             self.ver_salas()
-            i = int(input("Modificar sala: "))
-            nueva_capacidad = int(input("Nueva capacidad: "))
-            nuevo_formato_pantalla = input("Nuevo formato de pantalla: ")
-            nuevo_sonido = input("Nuevo sistema de sonido: ")
-            nuevo_tipo = input("Nuevo tipo de sala: ")
-
+            i = int(input("Numero de la sala a modificar: "))
+            nueva_capacidad = int(input("Nueva capacidad: ")) if input("Desea modificar la capacidad? (s/n): ").lower() == 's' else self.salas.arreglo[i].capacidad
+            nuevo_formato_pantalla = input("Nuevo formato de pantalla: ") if input("Desea modificar el formato de pantalla? (s/n): ").lower() == 's' else self.salas.arreglo[i].formato_pantalla    
+            nuevo_sonido = input("Nuevo sistema de sonido: ") if input("Desea modificar el sistema de sonido? (s/n): ").lower() == 's' else self.salas.arreglo[i].sonido
+            nuevo_tipo = input("Nuevo tipo de sala: ") if input("Desea modificar el tipo de sala? (s/n): ").lower() == 's' else self.salas.arreglo[i].tipo
+            numero_sala =  i
             sala_modificar = self.salas.arreglo[i]
 
-            # Obtener las funciones asociadas a la sala y convertirlas a una lista de diccionarios
-            funciones_sala = [funcion.__dict__ for funcion in sala_modificar.funciones.arreglo]
+            funcioness = Funciones()
+            for funcion in sala_modificar.funciones.arreglo:
+                funcioness.agregar(funcion)
 
-            # Aquí puedes hacer algo con las funciones, como mostrarlas
-            for funcion in funciones_sala:
+      
+            print("Funciones de la sala a modificar:")
+            for funcion in funcioness.arreglo:
                 print(f'Función: {funcion}')
-        
-            sala = Salas(nueva_capacidad, nuevo_formato_pantalla, nuevo_sonido, nuevo_tipo, funciones_sala)
+
+            sala = Salas(numero_sala,nueva_capacidad, nuevo_formato_pantalla, nuevo_sonido, nuevo_tipo, funcioness)
             bool = self.salas.modificar(i, sala)
+            print (sala)
             if self.banderaguardar:
-                self.salas.guardar_en_archivo()
+                        self.salas.guardar_en_archivo()
+            
+            
             if bool:
                 print('Modificado\n')
                 modificar_funciones = input("¿Desea modificar una funcion? (s/n): ")
                 if modificar_funciones.lower() == 's':
                     
-                    Fun = fun(sala.funciones)
+                    Fun = fun(funcioness)
                     Fun.consola()
                     sala.funciones = Fun.funciones
+
                     if self.banderaguardar:
                         self.salas.guardar_en_archivo()
                         

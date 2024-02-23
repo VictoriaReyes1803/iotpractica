@@ -27,27 +27,35 @@
         ]
     },
     {
-        "num": 2,
+        "num": 1,
         "nombre": "CineStar",
-        "ubi": "Sur",
+        "ubi": "NORTEE",
         "capacidad": 200,
         "numero_salas": 3,
         "clasificacion": "B",
         "salas": [
             {
-                "numero_sala": 2,
-                "capacidad": 40,
+                "numero_sala": 0,
+                "capacidad": 60,
                 "formato_pantalla": "2D",
                 "sonido": "DTS",
                 "tipo": "Regular",
                 "funciones": [
                     {
-                        "nf": 2,
+                        "nf": 0,
                         "hora_inicio": "20:30",
                         "duracion": "2.5 horas",
                         "tipo_proyeccion": "IMAX",
                         "precio_entrada": 15.0,
                         "pelicula": "Gwen Stacy: Into the Spider-Verse"
+                    },
+                    {
+                        "nf": 1,
+                        "hora_inicio": "22",
+                        "duracion": "22",
+                        "tipo_proyeccion": "22",
+                        "precio_entrada": 22.0,
+                        "pelicula": "22"
                     }
                 ]
             }
