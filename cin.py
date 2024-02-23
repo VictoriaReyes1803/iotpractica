@@ -1,5 +1,7 @@
 from Salas import Salas
+from Mongo import Mongo
 from Funciones import Funciones
+import jsonpickle
 from Cines import Cines
 from Sal import Sal
 from fun import fun
@@ -11,10 +13,12 @@ class Cin:
         if cines is None:
             self.cines = Cines()
             self.banderaguardar = True 
+            self.mongo = Mongo(db="basededates")
             self.cines.cargar_desde_archivo()
         else:
             self.cines = cines
             self.banderaguardar = False
+        
 
     def mostrar_menu(self):
         print("\nMenu:")
@@ -33,7 +37,7 @@ class Cin:
             print(f"Número de salas: {cine.numero_salas}")
             print(f"Clasificación: {cine.clasificacion}")
 
-            # Iterar sobre todas las salas de cada cine y mostrarlas
+           
             for sala in cine.salas.arreglo:
                 print(f"\nSala {sala.numero_sala} - Capacidad: {sala.capacidad} personas")
                 print(f"Formato de pantalla: {sala.formato_pantalla}")
@@ -51,25 +55,35 @@ class Cin:
             print("\n")
 
     def agregar_cine(self):
-        num = input("Ingrese el nombre del cine: ")
+        num = len(self.cines.arreglo)
         nombre = input("Ingrese el nombre del cine: ")
         ubi = input("Ingrese la ubicación del cine: ")
         capacidad = int(input("Ingrese la capacidad del cine: "))
         numero_salas = int(input("Ingrese el número de salas del cine: "))
-        
         clasificacion = input("Ingrese la clasificación del cine: ")
-        
+
         salas = Salas()
         sal = Sal(salas)
         sal.ciclo_menu_salas()
         salas = sal.salas
         print("salas:",salas)
         
+        cine_dict = {
+            "nombre": nombre,
+            "ubicacion": ubi,
+            "capacidad": capacidad,
+            "numero_salas": numero_salas,
+            "clasificacion": clasificacion,
+            "salas": Salas().dictt()
+        }
+        self.mongo.insert_one("Cines",cine_dict)
+
         cine = Cines(num,nombre, ubi, capacidad, numero_salas, clasificacion, salas)
         self.cines.agregar(cine)
-
+        
         if self.banderaguardar:
             self.cines.guardar_a_json("archivo.json");
+            
         
         print("Cine agregado exitosamente.")
         return cine

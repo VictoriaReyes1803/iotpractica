@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import pymongo
 from pymongo.server_api import ServerApi
 
 class Mongo:
@@ -36,7 +37,8 @@ class Mongo:
             print("Documento insertado, ID:", resultado.inserted_id)
         except Exception as e:
             print("Error al insertar el documento:", e)
-
+    
+   
     def find(self, collection, query={}):
         try:
             db = self.client[self.db]

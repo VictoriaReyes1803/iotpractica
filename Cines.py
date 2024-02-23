@@ -1,6 +1,8 @@
 
 from Salas import Salas
 from Funciones import Funciones
+from Mongo import Mongo
+from bson import ObjectId
 from Arreglo import Arreglo
 import json
 
@@ -14,6 +16,7 @@ class Cines(Arreglo):
         self.numero_salas = numero_salas
         self.clasificacion = clasificacion
         self.salas = Salas()
+        self.mongo = Mongo(db="basededates")
         self.salas = Salas() if salas is None else salas
 
     def __str__(self):
@@ -60,20 +63,64 @@ class Cines(Arreglo):
                 numero_salas=cine_data['numero_salas'],
                 clasificacion=cine_data['clasificacion']
             )
-
-            # Verificamos si hay salas en los datos
             salas_data = cine_data.get('salas', [])
             salas = Salas()
             salas.objetos_salas(salas_data)
 
             nueva_cine.salas = salas
             self.arreglo.append(nueva_cine)
+    def inserMongo(self, nombre, ubi, capacidad, numero_salas, clasificacion, salas):
+        cine_dict = {
+        'nombre': nombre,
+        'ubicacion': ubi,
+        'capacidad': capacidad,
+        'numero_salas': numero_salas,
+        'clasificacion': clasificacion,
+        'salas': []
+        }
+        for sala in salas:  # Usar el parámetro salas en lugar de cine.salas
+            sala_dict = {
+                'numero_sala': sala.numero_sala,
+                'capacidad': sala.capacidad,
+                'formato_pantalla': sala.formato_pantalla,
+                'sonido': sala.sonido,
+                'tipo': sala.tipo,
+                'funciones': []
+            }
+            for funcion in sala.funciones:
+                funcion_dict = {
+                    'nf': funcion.nf,
+                    'hora_inicio': funcion.hora_inicio,
+                    'duracion': funcion.duracion,
+                    'tipo_proyeccion': funcion.tipo_proyeccion,
+                    'precio_entrada': funcion.precio_entrada,
+                    'pelicula': funcion.pelicula
+                }
+                sala_dict['funciones'].append(funcion_dict)
+            cine_dict['salas'].append(sala_dict)
+        print(cine_dict)  # Mover la impresión fuera del bucle
+
+        try:
+            self.mongo.insert_one("Cines", cine_dict)
+            print("Cine agregado exitosamente.")
+            
+            if self.banderaguardar:
+                self.cines.guardar_a_json("archivo.json")
+                
+        except Exception as e:
+            print("Error al insertar el cine en la base de datos:", e)
+
+            
 
     def cargar_desde_archivo(self):
         nombre_archivo = "archivo.json"
         try:
             with open(nombre_archivo, 'r') as archivo:
                 data = json.load(archivo)
+                
+                # for cine_data in data:
+                #     self.mongo.insert_one("Cines", cine_data)
+
                 self.cargar_desde_diccionario(data)
                 print(f"\nDatos cargados desde '{nombre_archivo}'\n")
         except FileNotFoundError:
@@ -84,12 +131,15 @@ class Cines(Arreglo):
         data = self.dictt()
         with open(nombre_archivo, 'w') as archivo:
             json.dump(data, archivo, indent=4)
+            
+
 
     def guardar_en_archivo(self):
         nombre_archivo = "archivo.json"   
         data = self.to_dict()
         with open(nombre_archivo, 'w') as archivo:
             json.dump(data, archivo, indent=4)
+            
         print(f"\nDatos guardados en '{nombre_archivo}'\n")
 
     def objetos_cines(self,data):

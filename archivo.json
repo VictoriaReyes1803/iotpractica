@@ -1,7 +1,7 @@
 [
     {
-        "num": 1,
-        "nombre": "CineCity",
+        "num": 0,
+        "nombre": "CINESTAR",
         "ubi": "Centro",
         "capacidad": 300,
         "numero_salas": 5,
@@ -62,7 +62,34 @@
         ]
     },
     {
-        "num": "22",
+        "num": 2,
+        "nombre": "22",
+        "ubi": "22",
+        "capacidad": 22,
+        "numero_salas": 222,
+        "clasificacion": "22",
+        "salas": [
+            {
+                "numero_sala": 1,
+                "capacidad": 22,
+                "formato_pantalla": "22",
+                "sonido": "22",
+                "tipo": "22",
+                "funciones": [
+                    {
+                        "nf": 0,
+                        "hora_inicio": "22",
+                        "duracion": "22",
+                        "tipo_proyeccion": "22",
+                        "precio_entrada": 22.0,
+                        "pelicula": "22"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "num": 3,
         "nombre": "22",
         "ubi": "22",
         "capacidad": 22,
@@ -70,7 +97,25 @@
         "clasificacion": "22",
         "salas": [
             {
-                "numero_sala": "22",
+                "numero_sala": 1,
+                "capacidad": 22,
+                "formato_pantalla": "22",
+                "sonido": "22",
+                "tipo": "22",
+                "funciones": []
+            }
+        ]
+    },
+    {
+        "num": 4,
+        "nombre": "22",
+        "ubi": "22",
+        "capacidad": 22,
+        "numero_salas": 22,
+        "clasificacion": "222",
+        "salas": [
+            {
+                "numero_sala": 1,
                 "capacidad": 22,
                 "formato_pantalla": "22",
                 "sonido": "222",
@@ -81,6 +126,68 @@
                         "hora_inicio": "22",
                         "duracion": "22",
                         "tipo_proyeccion": "22",
+                        "precio_entrada": 22.0,
+                        "pelicula": "22"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "num": 5,
+        "nombre": "22",
+        "ubi": "22",
+        "capacidad": 22,
+        "numero_salas": 22,
+        "clasificacion": "22",
+        "salas": [
+            {
+                "numero_sala": 1,
+                "capacidad": 22,
+                "formato_pantalla": "22",
+                "sonido": "22",
+                "tipo": "22",
+                "funciones": [
+                    {
+                        "nf": 0,
+                        "hora_inicio": "22",
+                        "duracion": "22",
+                        "tipo_proyeccion": "22",
+                        "precio_entrada": 22.0,
+                        "pelicula": "22"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "num": 6,
+        "nombre": "22",
+        "ubi": "22",
+        "capacidad": 22,
+        "numero_salas": 22,
+        "clasificacion": "22",
+        "salas": [
+            {
+                "numero_sala": 1,
+                "capacidad": 22,
+                "formato_pantalla": "22",
+                "sonido": "22",
+                "tipo": "22",
+                "funciones": [
+                    {
+                        "nf": 0,
+                        "hora_inicio": "22",
+                        "duracion": "22",
+                        "tipo_proyeccion": "22",
+                        "precio_entrada": 22.0,
+                        "pelicula": "22"
+                    },
+                    {
+                        "nf": 1,
+                        "hora_inicio": "22",
+                        "duracion": "22",
+                        "tipo_proyeccion": "2",
                         "precio_entrada": 22.0,
                         "pelicula": "22"
                     }
