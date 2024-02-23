@@ -1,4 +1,4 @@
-from sal import Sal
+from Sal import Sal
 from fun import fun
 from cin import Cin
 class Menu:
