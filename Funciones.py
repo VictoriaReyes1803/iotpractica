@@ -1,16 +1,30 @@
 from Arreglo import Arreglo
 import json
+from Mongo import Mongo
 class Funciones(Arreglo):
     def __init__(self,nf=None, hora_inicio=None, duracion=None, tipo_proyeccion=None, precio_entrada=None, pelicula=None):
         super().__init__()
-        self.nf=nf
-        self.hora_inicio = hora_inicio
-        self.duracion = duracion
-        self.tipo_proyeccion = tipo_proyeccion
-        self.precio_entrada = precio_entrada
-        self.pelicula = pelicula
+        self.banderaLista= nf==None and hora_inicio==None and duracion==None 
+        if self.banderaLista:  
+            self.arreglo=[]
+        else:
+            self.arreglo=None
+
+            self.nf=nf
+            self.hora_inicio = hora_inicio
+            self.duracion = duracion
+            self.tipo_proyeccion = tipo_proyeccion
+            self.precio_entrada = precio_entrada
+            self.pelicula = pelicula
+        # self.mongo = Mongo(db="basededates")
     
     def to_dict(self):
+
+        if self.banderaLista: 
+            arreglo_dict=[]
+            for e in self.arreglo:
+                arreglo_dict.append(e.to_dict())
+            return arreglo_dict 
         return {
             'nf': self.nf,
             'hora_inicio': self.hora_inicio,
@@ -20,7 +34,7 @@ class Funciones(Arreglo):
             'pelicula': self.pelicula
         }
     def __str__(self):
-        if []== self.arreglo:
+        if not self.banderaLista:
             return f"No. Funcion {self.nf} - Funcion {self.hora_inicio} - Duracion: {self.duracion}\n" \
                f"Tipo: {self.tipo_proyeccion}\n" \
                f"Precio: {self.precio_entrada}\n" \
@@ -38,7 +52,7 @@ class Funciones(Arreglo):
                 print(f"Función {i}: {funcion}")
 
     def guardar_en_archivo(self,nombre_archivo):
-        data = self.dictt()
+        data = self.to_dict()
          
         self.writejson(data, nombre_archivo)
         print(f"\nDatos guardados en '{nombre_archivo}'\n")    
@@ -69,20 +83,13 @@ class Funciones(Arreglo):
             print(f"\t\tPelícula: {funcion_instance.pelicula}")
 
     print("\n")  
-    def to_dict(self):
-        funcion_dict = {
-        'nf': self.nf,
-        'hora_inicio': self.hora_inicio,
-        'duracion': self.duracion,
-        'tipo_proyeccion': self.tipo_proyeccion,
-        'precio_entrada': self.precio_entrada,
-        'pelicula': self.pelicula
-    }
-        return funcion_dict
+  
     def cargar_desde_archivo(self,nombre_archivo):
             # nombre_archivo = "funciones.json"
         try:
             data = self.readjson(nombre_archivo)
+            # for cine_data in data:
+            #         self.mongo.insert_one("Funciones", cine_data)
             self.objetos(data)
             print(f"\nDatos cargados desde '{nombre_archivo}'\n")
         except FileNotFoundError:

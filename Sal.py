@@ -2,6 +2,8 @@ from Salas import Salas
 from Funciones import Funciones
 from fun import fun
 from prettytable import PrettyTable
+import jsonpickle
+from Mongo import Mongo
 class Sal():
     def __init__(self, salas = None):
         
@@ -76,15 +78,11 @@ class Sal():
         Fun.consola()
         funciones = Fun.funciones
 
-
         newsala = Salas(numero_sala,capacidad, formato_pantalla, sonido, tipo, funciones)
-
-        print("newsala:",newsala)
-
         print("self.salas.agregar:",self.salas.agregar(newsala)) 
+        print ("*************************************",newsala.to_dict())
+        # Mongo.insert_one("Salas",newsala.to_dict())
     
-        self.ver_salas()
-
         if self.banderaguardar:
             self.salas.guardar_en_archivo()
 

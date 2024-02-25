@@ -9,15 +9,20 @@ import json
 class Cines(Arreglo):
     def __init__(self, num=None ,nombre=None, ubi=None, capacidad=None, numero_salas=None, clasificacion=None, salas=None):
         super().__init__() 
-        self.num=num
-        self.nombre = nombre
-        self.ubi = ubi
-        self.capacidad = capacidad
-        self.numero_salas = numero_salas
-        self.clasificacion = clasificacion
-        self.salas = Salas()
-        self.mongo = Mongo(db="basededates")
-        self.salas = Salas() if salas is None else salas
+        self.banderaLista= num==None and nombre==None and ubi==None 
+        if self.banderaLista:  
+            self.arreglo=[]
+        else:
+            self.arreglo=None
+            self.num=num
+            self.nombre = nombre
+            self.ubi = ubi
+            self.capacidad = capacidad
+            self.numero_salas = numero_salas
+            self.clasificacion = clasificacion
+            self.salas = Salas()
+            self.mongo = Mongo(db="basededates")
+            self.salas = Salas() if salas is None else salas
 
     def __str__(self):
         if not self.arreglo:
@@ -28,30 +33,24 @@ class Cines(Arreglo):
         else:
             return f"Es un arreglo de ({len(self.arreglo)}) elementos."
 
+        
     def dictt(self):
-        data = []
-        for cine in self.arreglo:
-            cine_data = {
-                'num': cine.num,
-                'nombre': cine.nombre,
-                'ubi': cine.ubi,
-                'capacidad': cine.capacidad,
-                'numero_salas': cine.numero_salas,
-                'clasificacion': cine.clasificacion,
-                'salas': []
-            }
-            for sala in cine.salas.arreglo:
-                sala_data = {
-                    'numero_sala': sala.numero_sala,
-                    'capacidad': sala.capacidad,
-                    'formato_pantalla': sala.formato_pantalla,
-                    'sonido': sala.sonido,
-                    'tipo': sala.tipo,
-                    'funciones': [funcion.to_dict() for funcion in sala.funciones.arreglo]  # Aquí modificamos la línea
-                }
-                cine_data['salas'].append(sala_data)
-            data.append(cine_data)
-        return data
+        if self.banderaLista: 
+            arreglo_dict=[]
+            for c in self.arreglo:
+                arreglo_dict.append(c.dictt())
+            return arreglo_dict 
+        
+        return {
+            "num": self.num,
+            "nombre": self.nombre,
+            "ubi": self.ubi,
+            "capacidad": self.capacidad,
+            "numero_salas": self.numero_salas,
+            "clasificacion": self.clasificacion,
+            "salas":self.salas.to_dict()
+        }
+        
 
     def cargar_desde_diccionario(self, diccionario):
         for cine_data in diccionario:
@@ -118,8 +117,8 @@ class Cines(Arreglo):
             with open(nombre_archivo, 'r') as archivo:
                 data = json.load(archivo)
                 
-                # for cine_data in data:
-                #     self.mongo.insert_one("Cines", cine_data)
+                for cine_data in data:
+                    self.mongo.insert_one("Cines", cine_data)
 
                 self.cargar_desde_diccionario(data)
                 print(f"\nDatos cargados desde '{nombre_archivo}'\n")

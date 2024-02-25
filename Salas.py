@@ -1,39 +1,35 @@
 import json
 from Funciones import Funciones
 from Arreglo import Arreglo
+from Mongo import Mongo
 
 class Salas(Arreglo):
     def __init__(self, numero_sala=None, capacidad=None, formato_pantalla=None, sonido=None, tipo=None, funciones=None):
         super().__init__()
+        self.banderaLista= numero_sala==None and capacidad==None and formato_pantalla==None 
+        if self.banderaLista:  
+            self.arreglo=[]
+        else:
+            self.arreglo=None
+
         self.numero_sala = numero_sala
         self.capacidad = capacidad
         self.formato_pantalla = formato_pantalla
         self.sonido = sonido
         self.tipo = tipo
         self.funciones = funciones
+        # self.mongo = Mongo(db="basededates")
         if self.funciones is None:
              self.funciones = Funciones()
 
             
 
 
-    def to_dictt(self):
-        funciones_data = [funcion.to_dict() for funcion in self.funciones.arreglo]
-        
-        return {
-            "arreglo": [],  # Aquí debes proporcionar los datos necesarios para serializar Salas
-            "numero_sala": self.numero_sala,
-            "capacidad": self.capacidad,
-            "formato_pantalla": self.formato_pantalla,
-            "sonido": self.sonido,
-            "tipo": self.tipo,
-            "funciones": funciones_data
-        }
-    
+
     
     def guardar_en_archivo(self):
         nombre_archivo = "salas.json"   
-        data = self.dictt()
+        data = self.to_dict()
          
         self.writejson(data, nombre_archivo)
         print(f"\nDatos guardados en '{nombre_archivo}'\n")    
@@ -43,6 +39,8 @@ class Salas(Arreglo):
         nombre_archivo = "salas.json"
         try:
             data = self.readjson(nombre_archivo)
+            # for sala_data in data:
+            #         self.mongo.insert_one("Salas", sala_data)
             self.cargar_desde_diccionario(data)
             print(f"\nDatos cargados desde '{nombre_archivo}'\n")
         except FileNotFoundError:
@@ -89,21 +87,24 @@ class Salas(Arreglo):
                 result = f"Es un arreglo de({len(self.arreglo)} elementos)"
                 
                 return result
-        
-    def dictt(self):
-            if len(self.arreglo) <= 0:
-                return self.to_dict()
-            else:
-                result = []
-            for elemento in self.arreglo:
-                sala_dict = elemento.to_dict()  
-                sala_dict['funciones'] = [funcion.to_dict() for funcion in elemento.funciones.arreglo]
-                result.append(sala_dict)
-            return result
 
     def to_dict(self):
-            return {k: v.to_dict() if k == 'funciones' else v for k, v in vars(self).items()} 
     
+        if self.banderaLista: 
+            arreglo_dict=[]
+            for s in self.arreglo:
+                arreglo_dict.append(s.to_dict())
+            return arreglo_dict 
+        return {
+            "numero_sala": self.numero_sala,
+            "capacidad": self.capacidad,
+            "formato_pantalla": self.formato_pantalla,
+            "sonido": self.sonido,
+            "tipo": self.tipo,
+            "funciones":self.funciones.to_dict()
+        }
+        
+      
 
     def objetos_salas(self,data):
         sala_list = []

@@ -1,6 +1,5 @@
 [
     {
-        "arreglo": [],
         "numero_sala": 1,
         "capacidad": 50,
         "formato_pantalla": "3D",
@@ -18,7 +17,6 @@
         ]
     },
     {
-        "arreglo": [],
         "numero_sala": 1,
         "capacidad": "11",
         "formato_pantalla": "11",
@@ -44,7 +42,6 @@
         ]
     },
     {
-        "arreglo": [],
         "numero_sala": 3,
         "capacidad": 3,
         "formato_pantalla": "33",
@@ -62,7 +59,6 @@
         ]
     },
     {
-        "arreglo": [],
         "numero_sala": 33,
         "capacidad": "33",
         "formato_pantalla": "33",
@@ -80,7 +76,6 @@
         ]
     },
     {
-        "arreglo": [],
         "numero_sala": "1",
         "capacidad": 1,
         "formato_pantalla": "1",
@@ -98,20 +93,70 @@
         ]
     },
     {
-        "arreglo": [],
-        "numero_sala": "11",
-        "capacidad": 11,
-        "formato_pantalla": "11",
-        "sonido": "11",
-        "tipo": "11",
+        "numero_sala": 6,
+        "capacidad": 77,
+        "formato_pantalla": "77",
+        "sonido": "777",
+        "tipo": "77",
         "funciones": [
             {
                 "nf": 0,
-                "hora_inicio": "11",
-                "duracion": "11",
-                "tipo_proyeccion": "11",
-                "precio_entrada": 11.0,
-                "pelicula": "11"
+                "hora_inicio": "77",
+                "duracion": "77",
+                "tipo_proyeccion": "77",
+                "precio_entrada": 77.0,
+                "pelicula": "77"
+            }
+        ]
+    },
+    {
+        "numero_sala": 7,
+        "capacidad": 7,
+        "formato_pantalla": "77",
+        "sonido": "77",
+        "tipo": "77",
+        "funciones": [
+            {
+                "nf": 0,
+                "hora_inicio": "77",
+                "duracion": "77",
+                "tipo_proyeccion": "77",
+                "precio_entrada": 77.0,
+                "pelicula": "77"
+            }
+        ]
+    },
+    {
+        "numero_sala": 8,
+        "capacidad": 77,
+        "formato_pantalla": "77",
+        "sonido": "77",
+        "tipo": "77",
+        "funciones": [
+            {
+                "nf": 0,
+                "hora_inicio": "88",
+                "duracion": "88",
+                "tipo_proyeccion": "88",
+                "precio_entrada": 88.0,
+                "pelicula": "88"
+            }
+        ]
+    },
+    {
+        "numero_sala": 9,
+        "capacidad": 88,
+        "formato_pantalla": "88",
+        "sonido": "888",
+        "tipo": "888",
+        "funciones": [
+            {
+                "nf": 0,
+                "hora_inicio": "88",
+                "duracion": "88",
+                "tipo_proyeccion": "88",
+                "precio_entrada": 88.0,
+                "pelicula": "88"
             }
         ]
     }

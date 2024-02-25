@@ -39,17 +39,6 @@ class Arreglo:
             for i, elemento in enumerate(self.arreglo):
                 cadena+=(f"{i + 1}:\n{elemento}\n")
             return cadena
-
-    def dictt(self):
-            if not self.arreglo:
-                return self.to_dict()
-            else:
-             a=[]
-             for elemento in self.arreglo:
-                a.append(elemento.to_dict())
-              
-
-            return a
     
     def write_json(self, archivo, data):
         added = False

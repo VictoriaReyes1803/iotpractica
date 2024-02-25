@@ -1,7 +1,7 @@
 from Funciones import Funciones
 import json
 from prettytable import PrettyTable
-
+from Mongo import Mongo
 class fun():
     def __init__(self, funciones=None ):
         if funciones is None:
@@ -25,6 +25,8 @@ class fun():
                                   precio_entrada=precio_entrada, pelicula=pelicula)
 
         self.funciones.agregar(nueva_funcion)
+        print ("*************************************",nueva_funcion.to_dict())
+        # Mongo.insert_one("Funciones", nueva_funcion.to_dict())
 
 
         if self.banderaguardar:
@@ -34,6 +36,7 @@ class fun():
 
 
         print(f"\nFunción {pelicula} agregada exitosamente!\n")
+       
 
     def ver_funciones(self):
         if self.funciones:
@@ -98,9 +101,9 @@ class fun():
             opcion = input("Ingrese el número de la opción deseada: ")
 
             if opcion == "1":
-                self.agregar_funcion()
-            elif opcion == "2":
                 self.ver_funciones()
+            elif opcion == "2":
+                self.agregar_funcion()
             elif opcion == "3":
                 self.modificar_funcion()
             elif opcion == "4":

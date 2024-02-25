@@ -40,55 +40,39 @@
         "pelicula": "11"
     },
     {
-        "nf": 6,
-        "hora_inicio": "33",
-        "duracion": "33",
-        "tipo_proyeccion": "33",
-        "precio_entrada": 33.0,
-        "pelicula": "33"
+        "nf": 5,
+        "hora_inicio": "88",
+        "duracion": "88",
+        "tipo_proyeccion": "88",
+        "precio_entrada": 88.0,
+        "pelicula": "88"
     },
     {
         "nf": 6,
-        "hora_inicio": "22",
-        "duracion": "22",
-        "tipo_proyeccion": "22",
-        "precio_entrada": 22.0,
-        "pelicula": "22"
+        "hora_inicio": "88",
+        "duracion": "88",
+        "tipo_proyeccion": "88",
+        "precio_entrada": 88.0,
+        "pelicula": "88"
     },
     {
         "nf": 7,
-        "hora_inicio": "1",
-        "duracion": "1",
-        "tipo_proyeccion": "1",
-        "precio_entrada": 1.0,
-        "pelicula": "1"
+        "hora_inicio": "99",
+        "duracion": "99",
+        "tipo_proyeccion": "99",
+        "precio_entrada": 99.0,
+        "pelicula": "99"
     },
     {
         "nf": 8,
-        "hora_inicio": "11",
-        "duracion": "11",
-        "tipo_proyeccion": "11",
-        "precio_entrada": 11.0,
-        "pelicula": "11"
+        "hora_inicio": "00",
+        "duracion": "00",
+        "tipo_proyeccion": "00",
+        "precio_entrada": 0.0,
+        "pelicula": "00"
     },
     {
         "nf": 9,
-        "hora_inicio": "22",
-        "duracion": "22",
-        "tipo_proyeccion": "22",
-        "precio_entrada": 22.0,
-        "pelicula": "22"
-    },
-    {
-        "nf": 10,
-        "hora_inicio": "22",
-        "duracion": "22",
-        "tipo_proyeccion": "22",
-        "precio_entrada": 22.0,
-        "pelicula": "22"
-    },
-    {
-        "nf": 11,
         "hora_inicio": "33",
         "duracion": "33",
         "tipo_proyeccion": "33",
