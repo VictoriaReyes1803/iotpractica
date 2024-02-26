@@ -110,11 +110,8 @@ class Cin:
 
                 if self.banderaguardar:
                     self.cines.guardar_a_json("archivo.json");
-                    self.cines.updateMongo(indice, "nombre", nuevo_nombre)
-                    self.cines.updateMongo(indice, "ubi", nueva_ubi)
-                    self.cines.updateMongo(indice, "capacidad", nueva_clasificacion)
-                    self.cines.updateMongo(indice, "numero_salas", nuevo_numero_salas)
-                    self.cines.updateMongo(indice, "clasificacion", nueva_clasificacion)
+                    print("*****",cine.dictt())
+                    self.cines.updatemany(indice,cine.dictt())
                 if bool:
                     print("Cine modificado exitosamente.")
                     modifica_salas = input("¿Desea modificar una sala? (s/n): ")
@@ -125,6 +122,7 @@ class Cin:
 
                         if self.banderaguardar:
                             self.cines.guardar_a_json("archivo.json");
+                            print(cine.dictt())
                             self.cines.updatecine(indice,cine)
                     return cine
             else:

@@ -201,6 +201,11 @@ class Cines(Arreglo):
             else:
                 print("No se encontró ningún documento para actualizar con el índice proporcionado.")
 
+    def updatemany(self,indice,json):
+        
+        self.mongo.update_manyy(self.myclient,"basededates","Cines",indice,"num",json)
+        
+
     def deleteOneMongo (self,indice):
             self.mongo.delete_One(self.myclient,"basededates","Cines","num",indice)
 

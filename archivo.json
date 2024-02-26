@@ -62,11 +62,11 @@
         ]
     },
     {
-        "num": 3,
-        "nombre": "FIFIS",
-        "ubi": "TITI",
+        "num": 2,
+        "nombre": "RAMIRIN",
+        "ubi": "TIERRON",
         "capacidad": 9000,
-        "numero_salas": 700,
+        "numero_salas": 8000,
         "clasificacion": "ADULTOS",
         "salas": [
             {
@@ -87,15 +87,15 @@
                 ]
             },
             {
-                "numero_sala": 2,
-                "capacidad": 99,
+                "numero_sala": 1,
+                "capacidad": 0,
                 "formato_pantalla": "99",
                 "sonido": "99",
                 "tipo": "99",
                 "funciones": [
                     {
                         "nf": 0,
-                        "hora_inicio": "99",
+                        "hora_inicio": "11111111111111",
                         "duracion": "99",
                         "tipo_proyeccion": "99",
                         "precio_entrada": 99.0,

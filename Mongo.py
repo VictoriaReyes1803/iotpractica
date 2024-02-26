@@ -79,6 +79,18 @@ class Mongo:
 
         x= mycol.update_many(filtro, actualizacion)
         return "***************Documento actualizado",x
+    def update_manyy(self,myclient,db,collection,indice,columindice, json):
+        try:
+            mydb = myclient[ db]
+            mycol = mydb[collection]
+            query = {columindice: indice }
+            object = (self.find_One(myclient,db,collection, query))
+            filtro = {"_id": object}
+            actualizacion = {"$set": json}
+            x= mycol.update_many(filtro, actualizacion)
+            return "***************Documento actualizado",x
+        except Exception as e:
+            print(f"Error al actualizar documentos: {e}")
     
     def delete_One(self,myclient,db,collection,colum, campo):
         mydb = myclient[ db]
@@ -92,6 +104,8 @@ class Mongo:
         x = mycol.delete_many({})
 
         print(x.deleted_count,"Documentos Borrados")
+
+    
 
   
 
