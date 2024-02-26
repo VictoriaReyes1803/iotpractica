@@ -1,6 +1,6 @@
 [
     {
-        "numero_sala": 1,
+        "numero_sala": 0,
         "capacidad": 50,
         "formato_pantalla": "3D",
         "sonido": "Dolby Atmos",
@@ -42,7 +42,7 @@
         ]
     },
     {
-        "numero_sala": 3,
+        "numero_sala": 2,
         "capacidad": 3,
         "formato_pantalla": "33",
         "sonido": "33",
@@ -59,7 +59,7 @@
         ]
     },
     {
-        "numero_sala": 33,
+        "numero_sala": 3,
         "capacidad": "33",
         "formato_pantalla": "33",
         "sonido": "33",
@@ -76,7 +76,7 @@
         ]
     },
     {
-        "numero_sala": "1",
+        "numero_sala": "4",
         "capacidad": 1,
         "formato_pantalla": "1",
         "sonido": "1",
@@ -93,7 +93,7 @@
         ]
     },
     {
-        "numero_sala": 6,
+        "numero_sala": 5,
         "capacidad": 77,
         "formato_pantalla": "77",
         "sonido": "777",
@@ -110,7 +110,7 @@
         ]
     },
     {
-        "numero_sala": 7,
+        "numero_sala": 6,
         "capacidad": 7,
         "formato_pantalla": "77",
         "sonido": "77",
@@ -128,10 +128,10 @@
     },
     {
         "numero_sala": 8,
-        "capacidad": 77,
-        "formato_pantalla": "77",
-        "sonido": "77",
-        "tipo": "77",
+        "capacidad": 90,
+        "formato_pantalla": "55",
+        "sonido": "44",
+        "tipo": "33",
         "funciones": [
             {
                 "nf": 0,
@@ -140,22 +140,13 @@
                 "tipo_proyeccion": "88",
                 "precio_entrada": 88.0,
                 "pelicula": "88"
-            }
-        ]
-    },
-    {
-        "numero_sala": 9,
-        "capacidad": 88,
-        "formato_pantalla": "88",
-        "sonido": "888",
-        "tipo": "888",
-        "funciones": [
+            },
             {
-                "nf": 0,
-                "hora_inicio": "88",
-                "duracion": "88",
-                "tipo_proyeccion": "88",
-                "precio_entrada": 88.0,
+                "nf": 1,
+                "hora_inicio": "17:00",
+                "duracion": "50",
+                "tipo_proyeccion": "33",
+                "precio_entrada": 8000.0,
                 "pelicula": "88"
             }
         ]

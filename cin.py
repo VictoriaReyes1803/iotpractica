@@ -13,7 +13,6 @@ class Cin:
         if cines is None:
             self.cines = Cines()
             self.banderaguardar = True 
-            self.mongo = Mongo(db="basededates")
             self.cines.cargar_desde_archivo()
         else:
             self.cines = cines
@@ -56,7 +55,7 @@ class Cin:
 
     def agregar_cine(self):
         num = len(self.cines.arreglo)
-        nombre = input("Ingrese el nombre del cine: ")
+        nombre = input("Ingrese el nombre del cine: ") 
         ubi = input("Ingrese la ubicación del cine: ")
         capacidad = int(input("Ingrese la capacidad del cine: "))
         numero_salas = int(input("Ingrese el número de salas del cine: "))
@@ -66,23 +65,15 @@ class Cin:
         sal = Sal(salas)
         sal.ciclo_menu_salas()
         salas = sal.salas
-        print("salas:",salas)
-        
-        cine_dict = {
-            "nombre": nombre,
-            "ubicacion": ubi,
-            "capacidad": capacidad,
-            "numero_salas": numero_salas,
-            "clasificacion": clasificacion,
-            "salas": Salas().dictt()
-        }
-        self.mongo.insert_one("Cines",cine_dict)
 
         cine = Cines(num,nombre, ubi, capacidad, numero_salas, clasificacion, salas)
         self.cines.agregar(cine)
+        print ("********",cine.dictt())
         
         if self.banderaguardar:
             self.cines.guardar_a_json("archivo.json");
+            self.mongo = Mongo(db="basededates")
+            self.mongo.insert_one("Cines", cine.dictt())
             
         
         print("Cine agregado exitosamente.")
@@ -119,7 +110,11 @@ class Cin:
 
                 if self.banderaguardar:
                     self.cines.guardar_a_json("archivo.json");
-
+                    self.cines.updateMongo(indice, "nombre", nuevo_nombre)
+                    self.cines.updateMongo(indice, "ubi", nueva_ubi)
+                    self.cines.updateMongo(indice, "capacidad", nueva_clasificacion)
+                    self.cines.updateMongo(indice, "numero_salas", nuevo_numero_salas)
+                    self.cines.updateMongo(indice, "clasificacion", nueva_clasificacion)
                 if bool:
                     print("Cine modificado exitosamente.")
                     modifica_salas = input("¿Desea modificar una sala? (s/n): ")
@@ -130,6 +125,7 @@ class Cin:
 
                         if self.banderaguardar:
                             self.cines.guardar_a_json("archivo.json");
+                            self.cines.updatecine(indice,cine)
                     return cine
             else:
                 print("Índice fuera de rango. Intente nuevamente.")
@@ -142,6 +138,7 @@ class Cin:
             self.cines.eliminar(indice)
             if self.banderaguardar:
                 self.cines.guardar_a_json("archivo.json");
+                self.cines.deleteOneMongo(indice)
         
             print("Cine eliminado exitosamente.")
         else:
@@ -161,6 +158,8 @@ class Cin:
             elif opcion == "4":
                 self.eliminar_cine()
             elif opcion == "5":
+                if self.banderaguardar:
+                    self.cines.deleteCollection()
                 print("¡Hasta luego!")
                 break
             else:

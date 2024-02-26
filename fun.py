@@ -26,13 +26,11 @@ class fun():
 
         self.funciones.agregar(nueva_funcion)
         print ("*************************************",nueva_funcion.to_dict())
-        # Mongo.insert_one("Funciones", nueva_funcion.to_dict())
-
-
+        
         if self.banderaguardar:
-    
             self.funciones.guardar_en_archivo("funciones.json")
-            
+            self.mongo = Mongo(db="basededates")
+            self.mongo.insert_one("Funciones", nueva_funcion.to_dict())
 
 
         print(f"\nFunción {pelicula} agregada exitosamente!\n")
@@ -48,6 +46,9 @@ class fun():
                     print(f"Pelicula: {funcion.pelicula}")
 
             print("\n")
+            self.mongo = Mongo(db="basededates")
+            resultados = self.mongo.find("Funciones")
+            print("Funciones encontradas en MONGO:", resultados)
             self.funciones.ver()
         else:
             print("Error: No se han cargado las funciones.")
@@ -69,25 +70,32 @@ class fun():
                                       pelicula=nueva_pelicula)
 
             self.funciones.modificar(indice, nueva_funcion)
+
             if self.banderaguardar:
-        
                 self.funciones.guardar_en_archivo("funciones.json")
+                self.funciones.updateMongo(indice, "hora_inicio", nueva_hora_inicio)
+                self.funciones.updateMongo(indice, "duracion", nueva_duracion)
+                self.funciones.updateMongo(indice, "tipo_proyeccion", nuevo_tipo_proyeccion)
+                self.funciones.updateMongo(indice, "precio_entrada", nuevo_precio_entrada)
+                self.funciones.updateMongo(indice, "pelicula", nueva_pelicula)
+
             print(f"\nFunción modificada exitosamente!\n")
         else:
             print("Índice fuera de rango. Intente nuevamente.")
 
     def eliminar_funcion(self):
+        self.ver_funciones()
         indice = int(input("Ingrese el índice de la función a eliminar: "))
         if 0 < indice < len(self.funciones.arreglo):
             self.funciones.eliminar(indice)
             self.funciones.nf = len(self.funciones.arreglo)
             if self.banderaguardar:
                 self.funciones.guardar_en_archivo("funciones.json")
+                self.funciones.deleteOneMongo(indice)
             print(f"\nFunción eliminada exitosamente!\n")
         else:
             print("Índice fuera de rango. Intente nuevamente.")
     
-
 
     def consola(self):
         while True:
@@ -109,6 +117,8 @@ class fun():
             elif opcion == "4":
                 self.eliminar_funcion()
             elif opcion == "5":
+                if self.banderaguardar:
+                    self.funciones.deleteCollection()
                 print("Hasta Luego!")
                 break
             else:

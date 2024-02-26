@@ -4,6 +4,7 @@ from Funciones import Funciones
 from Mongo import Mongo
 from bson import ObjectId
 from Arreglo import Arreglo
+import pymongo
 import json
 
 class Cines(Arreglo):
@@ -20,12 +21,17 @@ class Cines(Arreglo):
             self.capacidad = capacidad
             self.numero_salas = numero_salas
             self.clasificacion = clasificacion
-            self.salas = Salas()
-            self.mongo = Mongo(db="basededates")
-            self.salas = Salas() if salas is None else salas
+            self.salas = salas
+            
+            if self.salas is None:
+                 self.salas = Salas()
+        self.myclient = pymongo.MongoClient( "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+
+            
+
 
     def __str__(self):
-        if not self.arreglo:
+        if not self.banderaLista:
             return f"Cine {self.num} - Nombre {self.nombre} - Ubicación: {self.ubi}\n" \
                    f"Capacidad: {self.capacidad}\n" \
                    f"Número de salas: {self.numero_salas}\n" \
@@ -116,7 +122,7 @@ class Cines(Arreglo):
         try:
             with open(nombre_archivo, 'r') as archivo:
                 data = json.load(archivo)
-                
+                self.mongo = Mongo(db="basededates")
                 for cine_data in data:
                     self.mongo.insert_one("Cines", cine_data)
 
@@ -132,14 +138,6 @@ class Cines(Arreglo):
             json.dump(data, archivo, indent=4)
             
 
-
-    def guardar_en_archivo(self):
-        nombre_archivo = "archivo.json"   
-        data = self.to_dict()
-        with open(nombre_archivo, 'w') as archivo:
-            json.dump(data, archivo, indent=4)
-            
-        print(f"\nDatos guardados en '{nombre_archivo}'\n")
 
     def objetos_cines(self,data):
         cines_list = []
@@ -186,6 +184,40 @@ class Cines(Arreglo):
                 
         with open(archivo, "w") as file:
             json.dump(existing_data, file, indent=4, default=lambda x: x.to_dict() if hasattr(x, 'to_dict') else x)
+
+ 
+    def updateMongo(self, indice,columf,campof):
+            
+            query = {"num": indice}
+            object_id = (self.mongo.find_One(self.myclient,"basededates","Cines", query))
+            print (object_id)
+            if object_id:
+                colum = columf
+                campo = campof
+                print (self.mongo.update_one(self.myclient,"basededates","Cines",self.mongo.find_One(self.myclient,"basededates","Cines", query), colum, campo))
+                query = {"num": indice }
+                print (self.mongo.find_Oneever(self.myclient,"basededates","Cines", query))
+                print("Documento actualizado exitosamente.")
+            else:
+                print("No se encontró ningún documento para actualizar con el índice proporcionado.")
+
+    def deleteOneMongo (self,indice):
+            self.mongo.delete_One(self.myclient,"basededates","Cines","num",indice)
+
+    def updatecine(self,indice,documento):
+        query = {"num": indice}
+        object_id = (self.mongo.find_One(self.myclient,"basededates","Cines", query))
+        print (object_id)
+        if object_id: 
+              print(self.deleteOneMongo(indice))
+              self.mongo = Mongo(db="basededates")
+              self.mongo.insert_one("Cines",documento.dictt())
+        else:
+                print("No se encontró ningún documento para actualizar con el índice proporcionado.")
+  
+
+    def deleteCollection (self):
+            self.mongo.delete_many(self.myclient,"basededates","Cines")
 
 
 

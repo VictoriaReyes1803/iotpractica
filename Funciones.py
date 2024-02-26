@@ -1,6 +1,7 @@
 from Arreglo import Arreglo
 import json
 from Mongo import Mongo
+import pymongo
 class Funciones(Arreglo):
     def __init__(self,nf=None, hora_inicio=None, duracion=None, tipo_proyeccion=None, precio_entrada=None, pelicula=None):
         super().__init__()
@@ -16,7 +17,8 @@ class Funciones(Arreglo):
             self.tipo_proyeccion = tipo_proyeccion
             self.precio_entrada = precio_entrada
             self.pelicula = pelicula
-        # self.mongo = Mongo(db="basededates")
+        self.myclient = pymongo.MongoClient( "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+
     
     def to_dict(self):
 
@@ -57,6 +59,27 @@ class Funciones(Arreglo):
         self.writejson(data, nombre_archivo)
         print(f"\nDatos guardados en '{nombre_archivo}'\n")    
 
+    def updateMongo(self, indice,columf,campof):
+        
+        query = {"nf": indice}
+        object_id = (self.mongo.find_One(self.myclient,"basededates","Funciones", query))
+        print (object_id)
+        if object_id:
+            colum = columf
+            campo = campof
+            print (self.mongo.update_one(self.myclient,"basededates","Funciones",self.mongo.find_One(self.myclient,"basededates","Funciones", query), colum, campo))
+            query = {"nf": indice }
+            print (self.mongo.find_Oneever(self.myclient,"basededates","Funciones", query))
+            print("Documento actualizado exitosamente.")
+        else:
+            print("No se encontró ningún documento para actualizar con el índice proporcionado.")
+
+    def deleteOneMongo (self,indice):
+        self.mongo.delete_One(self.myclient,"basededates","Funciones","nf",indice)
+
+    def deleteCollection (self):
+        self.mongo.delete_many(self.myclient,"basededates","Funciones")
+
     def objetos(self,data):  
         self.arreglo=[] 
         if not data:
@@ -85,28 +108,16 @@ class Funciones(Arreglo):
     print("\n")  
   
     def cargar_desde_archivo(self,nombre_archivo):
-            # nombre_archivo = "funciones.json"
         try:
             data = self.readjson(nombre_archivo)
-            # for cine_data in data:
-            #         self.mongo.insert_one("Funciones", cine_data)
+            self.mongo = Mongo(db="basededates")
+            for cine_data in data:
+                    self.mongo.insert_one("Funciones", cine_data)
             self.objetos(data)
             print(f"\nDatos cargados desde '{nombre_archivo}'\n")
         except FileNotFoundError:
             print(f"Archivo '{nombre_archivo}' no encontrado. Iniciando con lista vacía.\n")
 
-
-    # def to_dictt(self):
-    #     return {
-    #         "arreglo": [],  # Aquí debes proporcionar los datos necesarios para serializar Funciones
-    #         "nf": self.nf,
-    #         "hora_inicio": self.hora_inicio,
-    #         "duracion": self.duracion,
-    #         "tipo_proyeccion": self.tipo_proyeccion,
-    #         "precio_entrada": self.precio_entrada,
-    #         "pelicula": self.pelicula,
-    #         "numero_sala": self.numero_sala
-    #     }
 
 if __name__ == '__main__':
     

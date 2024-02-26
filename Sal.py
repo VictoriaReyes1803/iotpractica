@@ -50,6 +50,8 @@ class Sal():
             elif opcion == 4:
                 self.eliminar_sala()
             elif opcion == 5:
+                if self.banderaguardar:
+                    self.salas.deleteCollection()
                 print('Hasta Luego\n')
                 break
             else:
@@ -81,10 +83,11 @@ class Sal():
         newsala = Salas(numero_sala,capacidad, formato_pantalla, sonido, tipo, funciones)
         print("self.salas.agregar:",self.salas.agregar(newsala)) 
         print ("*************************************",newsala.to_dict())
-        # Mongo.insert_one("Salas",newsala.to_dict())
     
         if self.banderaguardar:
             self.salas.guardar_en_archivo()
+            self.mongo = Mongo(db="basededates")
+            self.mongo.insert_one("Salas", newsala.to_dict())
 
         print("\n Sala agregada exitosamente!")
         return newsala 
@@ -93,6 +96,7 @@ class Sal():
         self.ver_salas()
         i = int(input("Eliminar sala: "))
         bool = self.salas.eliminar(i)
+        self.salas.deleteOneMongo(i)
         if bool:
             print('Eliminado\n')
         if self.banderaguardar:
@@ -100,49 +104,54 @@ class Sal():
         else:
             print('No se pudo eliminar\n')
 
-
     def modificar_sala(self):
         if []== self.salas.arreglo:
             print('No hay salas\n')
         else:
             self.ver_salas()
             i = int(input("Numero de la sala a modificar: "))
-            nueva_capacidad = int(input("Nueva capacidad: ")) if input("Desea modificar la capacidad? (s/n): ").lower() == 's' else self.salas.arreglo[i].capacidad
-            nuevo_formato_pantalla = input("Nuevo formato de pantalla: ") if input("Desea modificar el formato de pantalla? (s/n): ").lower() == 's' else self.salas.arreglo[i].formato_pantalla    
-            nuevo_sonido = input("Nuevo sistema de sonido: ") if input("Desea modificar el sistema de sonido? (s/n): ").lower() == 's' else self.salas.arreglo[i].sonido
-            nuevo_tipo = input("Nuevo tipo de sala: ") if input("Desea modificar el tipo de sala? (s/n): ").lower() == 's' else self.salas.arreglo[i].tipo
-            numero_sala =  i
-            sala_modificar = self.salas.arreglo[i]
+            if 0 <= i < len(self.salas.arreglo):
+                nueva_capacidad = int(input("Nueva capacidad: ")) if input("Desea modificar la capacidad? (s/n): ").lower() == 's' else self.salas.arreglo[i].capacidad
+                nuevo_formato_pantalla = input("Nuevo formato de pantalla: ") if input("Desea modificar el formato de pantalla? (s/n): ").lower() == 's' else self.salas.arreglo[i].formato_pantalla    
+                nuevo_sonido = input("Nuevo sistema de sonido: ") if input("Desea modificar el sistema de sonido? (s/n): ").lower() == 's' else self.salas.arreglo[i].sonido
+                nuevo_tipo = input("Nuevo tipo de sala: ") if input("Desea modificar el tipo de sala? (s/n): ").lower() == 's' else self.salas.arreglo[i].tipo
+                numero_sala =  i
+                sala_modificar = self.salas.arreglo[i]
 
-            funcioness = Funciones()
-            for funcion in sala_modificar.funciones.arreglo:
-                funcioness.agregar(funcion)
+                funcioness = Funciones()
+                for funcion in sala_modificar.funciones.arreglo:
+                    funcioness.agregar(funcion)
 
-      
-            print("Funciones de la sala a modificar:")
-            for funcion in funcioness.arreglo:
-                print(f'Función: {funcion}')
+        
+                print("Funciones de la sala a modificar:")
+                for funcion in funcioness.arreglo:
+                    print(f'Función: {funcion}')
 
-            sala = Salas(numero_sala,nueva_capacidad, nuevo_formato_pantalla, nuevo_sonido, nuevo_tipo, funcioness)
-            bool = self.salas.modificar(i, sala)
-            print (sala)
-            if self.banderaguardar:
-                        self.salas.guardar_en_archivo()
-            
-            
-            if bool:
-                print('Modificado\n')
-                modificar_funciones = input("¿Desea modificar una funcion? (s/n): ")
-                if modificar_funciones.lower() == 's':
-                    
-                    Fun = fun(funcioness)
-                    Fun.consola()
-                    sala.funciones = Fun.funciones
-
-                    if self.banderaguardar:
-                        self.salas.guardar_en_archivo()
+                newsala = Salas(numero_sala,nueva_capacidad, nuevo_formato_pantalla, nuevo_sonido, nuevo_tipo, funcioness)
+                bool = self.salas.modificar(i, newsala)
+                print (newsala)
+                if self.banderaguardar:
+                            self.salas.guardar_en_archivo()
+                            self.salas.updateMongo(i, "capacidad", nueva_capacidad)
+                            self.salas.updateMongo(i, "formato_pantalla", nuevo_formato_pantalla)
+                            self.salas.updateMongo(i, "sonido", nuevo_sonido)
+                            self.salas.updateMongo(i, "tipo", nuevo_tipo)
                         
-                return sala
+                if bool:
+                    print('Modificado\n')
+                    modificar_funciones = input("¿Desea modificar una funcion? (s/n): ")
+                    if modificar_funciones.lower() == 's':
+                        
+                        Fun = fun(funcioness)
+                        Fun.consola()
+                        newsala.funciones = Fun.funciones
+
+                        if self.banderaguardar:
+                            self.salas.guardar_en_archivo()
+                            self.salas.updatesala(i,newsala)
+                    return newsala
+                else:
+                    print("Indice fuera de rango")
             else:
                 print('No se pudo modificar\n')
 

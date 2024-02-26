@@ -1,6 +1,7 @@
 import json
 from Funciones import Funciones
 from Arreglo import Arreglo
+import pymongo
 from Mongo import Mongo
 
 class Salas(Arreglo):
@@ -18,13 +19,10 @@ class Salas(Arreglo):
         self.sonido = sonido
         self.tipo = tipo
         self.funciones = funciones
-        # self.mongo = Mongo(db="basededates")
+        
         if self.funciones is None:
              self.funciones = Funciones()
-
-            
-
-
+        self.myclient = pymongo.MongoClient( "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
     
     def guardar_en_archivo(self):
@@ -39,13 +37,65 @@ class Salas(Arreglo):
         nombre_archivo = "salas.json"
         try:
             data = self.readjson(nombre_archivo)
-            # for sala_data in data:
-            #         self.mongo.insert_one("Salas", sala_data)
+            self.mongo = Mongo(db="basededates")
+            for sala_data in data:
+                    self.mongo.insert_one("Salas", sala_data)
             self.cargar_desde_diccionario(data)
             print(f"\nDatos cargados desde '{nombre_archivo}'\n")
         except FileNotFoundError:
             print(f"Archivo '{nombre_archivo}' no encontrado. Iniciando con lista vacía.\n")
    
+
+    def to_dict(self):
+    
+        if self.banderaLista: 
+            arreglo_dict=[]
+            for s in self.arreglo:
+                arreglo_dict.append(s.to_dict())
+            return arreglo_dict 
+        return {
+            "numero_sala": self.numero_sala,
+            "capacidad": self.capacidad,
+            "formato_pantalla": self.formato_pantalla,
+            "sonido": self.sonido,
+            "tipo": self.tipo,
+            "funciones":self.funciones.to_dict()
+        }
+        
+    def updateMongo(self, indice,columf,campof):
+            
+            query = {"numero_sala": indice}
+            object_id = (self.mongo.find_One(self.myclient,"basededates","Salas", query))
+            print (object_id)
+            if object_id:
+                colum = columf
+                campo = campof
+                print (self.mongo.update_one(self.myclient,"basededates","Salas",self.mongo.find_One(self.myclient,"basededates","Salas", query), colum, campo))
+                query = {"numero_sala": indice }
+                print (self.mongo.find_Oneever(self.myclient,"basededates","Salas", query))
+                print("Documento actualizado exitosamente.")
+            else:
+                print("No se encontró ningún documento para actualizar con el índice proporcionado.")
+
+    def deleteOneMongo (self,indice):
+            self.mongo.delete_One(self.myclient,"basededates","Salas","numero_sala",indice)
+
+    def updatesala(self,indice,documento):
+        query = {"numero_sala": indice}
+        object_id = (self.mongo.find_One(self.myclient,"basededates","Salas", query))
+        print (object_id)
+        if object_id: 
+              print(self.deleteOneMongo(indice))
+              self.mongo = Mongo(db="basededates")
+              self.mongo.insert_one("Salas",documento.to_dict())
+        else:
+                print("No se encontró ningún documento para actualizar con el índice proporcionado.")
+  
+
+    def deleteCollection (self):
+            self.mongo.delete_many(self.myclient,"basededates","Salas")
+
+
 
     def cargar_desde_diccionario(self, diccionario):
         for sala_data in diccionario:
@@ -65,45 +115,18 @@ class Salas(Arreglo):
             nueva_sala.funciones = funciones
             self.arreglo.append(nueva_sala)
 
-
- 
-    # def cargar_desde_archivo(self):
-    #     nombre_archivo = "salas.json"
-    #     try:
-    #         data = self.readjson(nombre_archivo)
-    #         self.objetos_salas(data)
-    #         print(f"\nDatos cargados desde '{nombre_archivo}'\n")
-    #     except FileNotFoundError:
-    #         print(f"Archivo '{nombre_archivo}' no encontrado. Iniciando con lista vacía.\n")
-
     def __str__(self):
-        if []== self.arreglo:
+        if not self.banderaLista:
                                                 return f"Sala {self.numero_sala} - Capacidad: {self.capacidad} personas\n" \
                                                 f"Formato de pantalla: {self.formato_pantalla}\n" \
                                                 f"Sistema de sonido: {self.sonido}\n" \
                                                 f"Tipo de sala: {self.tipo}\n" 
         else:
                                                 
-                result = f"Es un arreglo de({len(self.arreglo)} elementos)"
-                
-                return result
+            result = f"Es un arreglo de({len(self.arreglo)} elementos)"
+            
+            return result
 
-    def to_dict(self):
-    
-        if self.banderaLista: 
-            arreglo_dict=[]
-            for s in self.arreglo:
-                arreglo_dict.append(s.to_dict())
-            return arreglo_dict 
-        return {
-            "numero_sala": self.numero_sala,
-            "capacidad": self.capacidad,
-            "formato_pantalla": self.formato_pantalla,
-            "sonido": self.sonido,
-            "tipo": self.tipo,
-            "funciones":self.funciones.to_dict()
-        }
-        
       
 
     def objetos_salas(self,data):
@@ -129,14 +152,6 @@ class Salas(Arreglo):
             if hasattr(sala_instance, 'funciones'):
                 print("Funciones:")
                 sala_instance.funciones.ver()
-            # for funcion_instance in sala_instance.funciones.arreglo:
-            #     print(f"\t\tFunción {funcion_instance.nf}")
-            #     print(f"\t\tHora de inicio: {funcion_instance.hora_inicio}")
-            #     print(f"\t\tDuración: {funcion_instance.duracion}")
-            #     print(f"\t\tTipo de proyección: {funcion_instance.tipo_proyeccion}")
-            #     print(f"\t\tPrecio de entrada: {funcion_instance.precio_entrada}")
-            #     print(f"\t\tPelícula: {funcion_instance.pelicula}")
-
         print("\n")  
 
 
