@@ -1,69 +1,64 @@
 [
     {
-        "numero_sala": 0,
-        "capacidad": 50,
-        "formato_pantalla": "3D",
-        "sonido": "Dolby Atmos",
-        "tipo": "VIP",
-        "funciones": [
-            {
-                "nf": 1,
-                "hora_inicio": "18:00",
-                "duracion": "2 horas",
-                "tipo_proyeccion": "Digital",
-                "precio_entrada": 10.5,
-                "pelicula": "Spider-Man: No Way Home"
-            }
-        ]
-    },
-    {
         "numero_sala": 1,
-        "capacidad": "11",
-        "formato_pantalla": "11",
-        "sonido": "11",
-        "tipo": "3D",
+        "capacidad": 66,
+        "formato_pantalla": "66",
+        "sonido": "66",
+        "tipo": "66",
+        "total_ganancias": null,
         "funciones": [
             {
-                "nf": 1,
-                "hora_inicio": "20:30",
-                "duracion": "2.5 horas",
-                "tipo_proyeccion": "IMAX",
-                "precio_entrada": 15.0,
-                "pelicula": "Gwen Stacy: Into the Spider-Verse"
+                "nf": 0,
+                "hora_inicio": "55",
+                "duracion": "55",
+                "tipo_proyeccion": "55",
+                "precio_entrada": 55.0,
+                "pelicula": "55",
+                "total_ganancias": 871.2,
+                "ventas": [
+                    {
+                        "num_ticket": 0,
+                        "can_boletos": 66,
+                        "costo_boleto": 66.0,
+                        "total_venta": 4356.0,
+                        "ganancia": 435.6
+                    },
+                    {
+                        "num_ticket": 1,
+                        "can_boletos": 66,
+                        "costo_boleto": 66.0,
+                        "total_venta": 4356.0,
+                        "ganancia": 435.6
+                    }
+                ]
             },
             {
                 "nf": 1,
-                "hora_inicio": "20:30",
-                "duracion": "5",
-                "tipo_proyeccion": "IMAX",
-                "precio_entrada": 15.0,
-                "pelicula": "Gwen Stacy: Into the Spider-Verse"
+                "hora_inicio": "55",
+                "duracion": "55",
+                "tipo_proyeccion": "55",
+                "precio_entrada": 55.0,
+                "pelicula": "55",
+                "total_ganancias": 302.5,
+                "ventas": [
+                    {
+                        "num_ticket": 0,
+                        "can_boletos": 55,
+                        "costo_boleto": 55.0,
+                        "total_venta": 3025.0,
+                        "ganancia": 302.5
+                    }
+                ]
             }
         ]
     },
     {
         "numero_sala": 2,
-        "capacidad": 3,
-        "formato_pantalla": "33",
-        "sonido": "33",
-        "tipo": "33",
-        "funciones": [
-            {
-                "nf": 0,
-                "hora_inicio": "33",
-                "duracion": "33",
-                "tipo_proyeccion": "33",
-                "precio_entrada": 33.0,
-                "pelicula": "33"
-            }
-        ]
-    },
-    {
-        "numero_sala": 3,
-        "capacidad": "33",
-        "formato_pantalla": "33",
-        "sonido": "33",
-        "tipo": "3D",
+        "capacidad": 22,
+        "formato_pantalla": "22",
+        "sonido": "22",
+        "tipo": "22",
+        "total_ganancias": 145.20000000000002,
         "funciones": [
             {
                 "nf": 0,
@@ -71,100 +66,42 @@
                 "duracion": "22",
                 "tipo_proyeccion": "22",
                 "precio_entrada": 22.0,
-                "pelicula": "22"
-            }
-        ]
-    },
-    {
-        "numero_sala": "4",
-        "capacidad": 1,
-        "formato_pantalla": "1",
-        "sonido": "1",
-        "tipo": "1",
-        "funciones": [
-            {
-                "nf": 0,
-                "hora_inicio": "1",
-                "duracion": "1",
-                "tipo_proyeccion": "1",
-                "precio_entrada": 1.0,
-                "pelicula": "1"
-            }
-        ]
-    },
-    {
-        "numero_sala": 5,
-        "capacidad": 77,
-        "formato_pantalla": "77",
-        "sonido": "777",
-        "tipo": "77",
-        "funciones": [
-            {
-                "nf": 0,
-                "hora_inicio": "77",
-                "duracion": "77",
-                "tipo_proyeccion": "77",
-                "precio_entrada": 77.0,
-                "pelicula": "77"
-            }
-        ]
-    },
-    {
-        "numero_sala": 6,
-        "capacidad": 7,
-        "formato_pantalla": "77",
-        "sonido": "77",
-        "tipo": "77",
-        "funciones": [
-            {
-                "nf": 0,
-                "hora_inicio": "77",
-                "duracion": "77",
-                "tipo_proyeccion": "77",
-                "precio_entrada": 77.0,
-                "pelicula": "77"
-            }
-        ]
-    },
-    {
-        "numero_sala": 8,
-        "capacidad": 90,
-        "formato_pantalla": "55",
-        "sonido": "44",
-        "tipo": "33",
-        "funciones": [
-            {
-                "nf": 0,
-                "hora_inicio": "88",
-                "duracion": "88",
-                "tipo_proyeccion": "88",
-                "precio_entrada": 88.0,
-                "pelicula": "88"
+                "pelicula": "22",
+                "total_ganancias": 96.80000000000001,
+                "ventas": [
+                    {
+                        "num_ticket": 0,
+                        "can_boletos": 22,
+                        "costo_boleto": 22.0,
+                        "total_venta": 484.0,
+                        "ganancia": 48.400000000000006
+                    },
+                    {
+                        "num_ticket": 1,
+                        "can_boletos": 22,
+                        "costo_boleto": 22.0,
+                        "total_venta": 484.0,
+                        "ganancia": 48.400000000000006
+                    }
+                ]
             },
             {
                 "nf": 1,
-                "hora_inicio": "17:00",
-                "duracion": "50",
-                "tipo_proyeccion": "33",
-                "precio_entrada": 8000.0,
-                "pelicula": "88"
-            }
-        ]
-    },
-    {
-        "numero_sala": 8,
-        "capacidad": 6,
-        "formato_pantalla": "666",
-        "sonido": "66",
-        "tipo": "66",
-        "funciones": [
-            {
-                "nf": 0,
-                "hora_inicio": "5",
-                "duracion": "55",
-                "tipo_proyeccion": "55",
-                "precio_entrada": 55.0,
-                "pelicula": "55"
+                "hora_inicio": "22",
+                "duracion": "22",
+                "tipo_proyeccion": "22",
+                "precio_entrada": 22.0,
+                "pelicula": "22",
+                "total_ganancias": 48.400000000000006,
+                "ventas": [
+                    {
+                        "num_ticket": 0,
+                        "can_boletos": 22,
+                        "costo_boleto": 22.0,
+                        "total_venta": 484.0,
+                        "ganancia": 48.400000000000006
+                    }
+                ]
             }
         ]
     }

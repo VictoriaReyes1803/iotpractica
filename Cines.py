@@ -8,7 +8,7 @@ import pymongo
 import json
 
 class Cines(Arreglo):
-    def __init__(self, num=None ,nombre=None, ubi=None, capacidad=None, numero_salas=None, clasificacion=None, salas=None):
+    def __init__(self, num=None ,nombre=None, ubi=None, capacidad=None, numero_salas=None, clasificacion=None, salas=None, total_ganancias=None):
         super().__init__() 
         self.banderaLista= num==None and nombre==None and ubi==None 
         if self.banderaLista:  
@@ -21,11 +21,12 @@ class Cines(Arreglo):
             self.capacidad = capacidad
             self.numero_salas = numero_salas
             self.clasificacion = clasificacion
+            self.total_ganancias = total_ganancias
             self.salas = salas
             
             if self.salas is None:
                  self.salas = Salas()
-        self.myclient = pymongo.MongoClient( "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+        #self.myclient = pymongo.MongoClient( "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
             
 
@@ -35,7 +36,8 @@ class Cines(Arreglo):
             return f"Cine {self.num} - Nombre {self.nombre} - Ubicación: {self.ubi}\n" \
                    f"Capacidad: {self.capacidad}\n" \
                    f"Número de salas: {self.numero_salas}\n" \
-                   f"Clasificación: {self.clasificacion}\n"
+                   f"Clasificación: {self.clasificacion}\n" \
+                    f"Total de ganancias: {self.total_ganancias}\n" 
         else:
             return f"Es un arreglo de ({len(self.arreglo)}) elementos."
 
@@ -54,6 +56,7 @@ class Cines(Arreglo):
             "capacidad": self.capacidad,
             "numero_salas": self.numero_salas,
             "clasificacion": self.clasificacion,
+            "total_ganancias": self.total_ganancias,
             "salas":self.salas.to_dict()
         }
         
@@ -66,7 +69,8 @@ class Cines(Arreglo):
                 ubi=cine_data['ubi'],
                 capacidad=cine_data['capacidad'],
                 numero_salas=cine_data['numero_salas'],
-                clasificacion=cine_data['clasificacion']
+                clasificacion=cine_data['clasificacion'],
+                total_ganancias=cine_data['total_ganancias']
             )
             salas_data = cine_data.get('salas', [])
             salas = Salas()
@@ -74,6 +78,8 @@ class Cines(Arreglo):
 
             nueva_cine.salas = salas
             self.arreglo.append(nueva_cine)
+
+
     def inserMongo(self, nombre, ubi, capacidad, numero_salas, clasificacion, salas):
         cine_dict = {
         'nombre': nombre,
@@ -148,7 +154,8 @@ class Cines(Arreglo):
                 ubi=cine_data['ubi'],
                 capacidad=cine_data['capacidad'],
                 numero_salas=cine_data['numero_salas'],
-                clasificacion=cine_data['clasificacion']
+                clasificacion=cine_data['clasificacion'],
+                total_ganancias=cine_data['total_ganancias']
                 )
             salas=Salas()
             salas.objetos_salas(cine_data["salas"])
@@ -161,11 +168,12 @@ class Cines(Arreglo):
             print(f"Capacidad: {cine_instance.capacidad}")
             print(f"Número de salas: {cine_instance.numero_salas}")
             print(f"Clasificación: {cine_instance.clasificacion}")
+            print(f"Total de ganancias: {cine_instance.total_ganancias}")
 
             for sala_instance in cine_instance.salas.arreglo:
                  print(f"\tSala {sala_instance.numero_sala} - Capacidad: {sala_instance.capacidad}")
-                 print(f"\tFormato de pantalla: {sala_instance.formato_pantalla} - Sonido: {sala_instance.sonido} - Tipo: {sala_instance.tipo}")
-
+                 print(f"\tFormato de pantalla: {sala_instance.formato_pantalla} - Sonido: {sala_instance.sonido} - Tipo: {sala_instance.tipo} ")
+                 print(f"\tTotal de ganancias: {sala_instance.total_ganancias}")
     
     def Jsonn(self, archivo, data):
         try:

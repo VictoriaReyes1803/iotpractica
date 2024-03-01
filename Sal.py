@@ -22,6 +22,7 @@ class Sal():
             print(f"Formato de pantalla: {sala.formato_pantalla}")
             print(f"Sistema de sonido: {sala.sonido}")
             print(f"Tipo de sala: {sala.tipo}")
+            print(f"Total de ganancias: {sala.total_ganancias}")
             print(f"Funciones: {sala.funciones}")
 
             if sala.funciones.arreglo:
@@ -31,6 +32,13 @@ class Sal():
                     print(f"Tipo: {funcion.tipo_proyeccion}")
                     print(f"Precio: {funcion.precio_entrada}")
                     print(f"Pelicula: {funcion.pelicula}")
+                    print(f"Total Ganancias: {funcion.total_ganancias}")
+                    print(f"Ventas: {funcion.ventas}")
+                    if funcion.ventas.arreglo:
+                        print("\nVentas:")
+                        for venta in funcion.ventas.arreglo:
+                            print(f"\nNum Ticket {venta.num_ticket} - Cantidad de Boletos: {venta.can_boletos} - Costo por boleto: {venta.costo_boleto}")
+                            print(f"Total de Venta: {venta.total_venta} - Ganancia: {venta.ganancia}")
 
         print("\n")
 
@@ -80,8 +88,13 @@ class Sal():
         Fun.consola()
         funciones = Fun.funciones
 
-        newsala = Salas(numero_sala,capacidad, formato_pantalla, sonido, tipo, funciones)
+        total_ganancias = funciones.Total_ganancias()
+        print("TOTAL GANANCIAS\n")
+        print(total_ganancias)
+
+        newsala = Salas(numero_sala,capacidad, formato_pantalla, sonido, tipo, funciones,total_ganancias = total_ganancias,)
         print("self.salas.agregar:",self.salas.agregar(newsala)) 
+        
         print ("*************************************",newsala.to_dict())
     
         if self.banderaguardar:
@@ -95,10 +108,10 @@ class Sal():
     def eliminar_sala(self):
         self.ver_salas()
         i = int(input("Eliminar sala: "))
-        bool = self.salas.eliminar(i)
+        if 0 < i < len(self.salas.arreglo):
+         self.salas.eliminar(i)
         # self.salas.deleteOneMongo(i)
-        if bool:
-            print('Eliminado\n')
+         print('Eliminado\n')
         if self.banderaguardar:
             self.salas.guardar_en_archivo()
         else:
@@ -120,7 +133,12 @@ class Sal():
 
                 print(sala_modificar.funciones.mostrartabla()) 
 
-                newsala = Salas(numero_sala,nueva_capacidad, nuevo_formato_pantalla, nuevo_sonido, nuevo_tipo, sala_modificar.funciones)
+                funciones = Funciones()
+                total_ganancias = funciones.Total_ganancias()
+                print("TOTAL GANANCIAS\n")
+                print(total_ganancias)
+
+                newsala = Salas(numero_sala,nueva_capacidad, nuevo_formato_pantalla, nuevo_sonido, nuevo_tipo, sala_modificar.funciones,total_ganancias=total_ganancias)
                 self.salas.modificar(i, newsala)
                 print (newsala)
 

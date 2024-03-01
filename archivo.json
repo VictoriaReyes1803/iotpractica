@@ -1,132 +1,105 @@
 [
     {
         "num": 0,
-        "nombre": "CINESTAR",
-        "ubi": "Centro",
-        "capacidad": 300,
-        "numero_salas": 5,
-        "clasificacion": "A",
+        "nombre": "22",
+        "ubi": "22",
+        "capacidad": 22,
+        "numero_salas": 22,
+        "clasificacion": "22",
+        "total_ganancias": 1742.4,
         "salas": [
             {
                 "numero_sala": 1,
-                "capacidad": 50,
-                "formato_pantalla": "3D",
-                "sonido": "Dolby Atmos",
-                "tipo": "VIP",
-                "funciones": [
-                    {
-                        "nf": 1,
-                        "hora_inicio": "18:00",
-                        "duracion": "2 horas",
-                        "tipo_proyeccion": "Digital",
-                        "precio_entrada": 10.5,
-                        "pelicula": "Spider-Man: No Way Home"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "num": 1,
-        "nombre": "CineStar",
-        "ubi": "NORTEE",
-        "capacidad": 200,
-        "numero_salas": 3,
-        "clasificacion": "B",
-        "salas": [
-            {
-                "numero_sala": 0,
-                "capacidad": 60,
-                "formato_pantalla": "2D",
-                "sonido": "DTS",
-                "tipo": "Regular",
+                "capacidad": 22,
+                "formato_pantalla": "22",
+                "sonido": "22",
+                "tipo": "22",
+                "total_ganancias": 968.0000000000001,
                 "funciones": [
                     {
                         "nf": 0,
-                        "hora_inicio": "20:30",
-                        "duracion": "2.5 horas",
-                        "tipo_proyeccion": "IMAX",
-                        "precio_entrada": 15.0,
-                        "pelicula": "Gwen Stacy: Into the Spider-Verse"
-                    },
-                    {
-                        "nf": 1,
                         "hora_inicio": "22",
                         "duracion": "22",
                         "tipo_proyeccion": "22",
                         "precio_entrada": 22.0,
-                        "pelicula": "22"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "num": 2,
-        "nombre": "RAMIRIN",
-        "ubi": "TIERRON",
-        "capacidad": 9000,
-        "numero_salas": 8000,
-        "clasificacion": "ADULTOS",
-        "salas": [
-            {
-                "numero_sala": 1,
-                "capacidad": 99,
-                "formato_pantalla": "99",
-                "sonido": "99",
-                "tipo": "99",
-                "funciones": [
+                        "pelicula": "22",
+                        "total_ganancias": 193.60000000000002,
+                        "ventas": [
+                            {
+                                "num_ticket": 0,
+                                "can_boletos": 22,
+                                "costo_boleto": 22.0,
+                                "total_venta": 484.0,
+                                "ganancia": 48.400000000000006
+                            },
+                            {
+                                "num_ticket": 1,
+                                "can_boletos": 22,
+                                "costo_boleto": 22.0,
+                                "total_venta": 484.0,
+                                "ganancia": 48.400000000000006
+                            },
+                            {
+                                "num_ticket": 2,
+                                "can_boletos": 22,
+                                "costo_boleto": 22.0,
+                                "total_venta": 484.0,
+                                "ganancia": 48.400000000000006
+                            },
+                            {
+                                "num_ticket": 3,
+                                "can_boletos": 22,
+                                "costo_boleto": 22.0,
+                                "total_venta": 484.0,
+                                "ganancia": 48.400000000000006
+                            }
+                        ]
+                    },
                     {
-                        "nf": 0,
-                        "hora_inicio": "99",
-                        "duracion": "99",
-                        "tipo_proyeccion": "99",
-                        "precio_entrada": 99.0,
-                        "pelicula": "99"
+                        "nf": 1,
+                        "hora_inicio": "8",
+                        "duracion": "888",
+                        "tipo_proyeccion": "88",
+                        "precio_entrada": 88.0,
+                        "pelicula": "88",
+                        "total_ganancias": 774.4000000000001,
+                        "ventas": [
+                            {
+                                "num_ticket": 0,
+                                "can_boletos": 88,
+                                "costo_boleto": 88.0,
+                                "total_venta": 7744.0,
+                                "ganancia": 774.4000000000001
+                            }
+                        ]
                     }
                 ]
             },
             {
-                "numero_sala": 1,
-                "capacidad": 0,
-                "formato_pantalla": "99",
-                "sonido": "99",
-                "tipo": "99",
+                "numero_sala": 2,
+                "capacidad": 55,
+                "formato_pantalla": "55",
+                "sonido": "55",
+                "tipo": "55",
+                "total_ganancias": 774.4000000000001,
                 "funciones": [
                     {
                         "nf": 0,
-                        "hora_inicio": "11111111111111",
-                        "duracion": "99",
-                        "tipo_proyeccion": "99",
-                        "precio_entrada": 99.0,
-                        "pelicula": "99"
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "num": 4,
-        "nombre": "CITICINEMAX",
-        "ubi": "TIERRON",
-        "capacidad": 888,
-        "numero_salas": 88,
-        "clasificacion": "88",
-        "salas": [
-            {
-                "numero_sala": 1,
-                "capacidad": 88,
-                "formato_pantalla": "888",
-                "sonido": "888",
-                "tipo": "88",
-                "funciones": [
-                    {
-                        "nf": 0,
-                        "hora_inicio": "88",
-                        "duracion": "888",
-                        "tipo_proyeccion": "888",
-                        "precio_entrada": 88.0,
-                        "pelicula": "88"
+                        "hora_inicio": "55",
+                        "duracion": "55",
+                        "tipo_proyeccion": "55",
+                        "precio_entrada": 55.0,
+                        "pelicula": "55",
+                        "total_ganancias": 774.4000000000001,
+                        "ventas": [
+                            {
+                                "num_ticket": 0,
+                                "can_boletos": 88,
+                                "costo_boleto": 88.0,
+                                "total_venta": 7744.0,
+                                "ganancia": 774.4000000000001
+                            }
+                        ]
                     }
                 ]
             }

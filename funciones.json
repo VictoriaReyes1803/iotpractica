@@ -1,61 +1,27 @@
 [
     {
         "nf": 0,
-        "hora_inicio": "18:00",
-        "duracion": "2 horas",
-        "tipo_proyeccion": "Digital",
-        "precio_entrada": 10.5,
-        "pelicula": "Spider-Man: No Way Home"
-    },
-    {
-        "nf": 1,
-        "hora_inicio": "20:30",
-        "duracion": "2.5 horas",
-        "tipo_proyeccion": "3ed",
-        "precio_entrada": 15.0,
-        "pelicula": "Gwen Stacy: Into the Spider-Verse"
-    },
-    {
-        "nf": 2,
-        "hora_inicio": "20:40",
-        "duracion": "2 horas y 15 min",
-        "tipo_proyeccion": "IMAX",
-        "precio_entrada": 250.0,
-        "pelicula": "Hasta el ultimo Hombre"
-    },
-    {
-        "nf": 3,
-        "hora_inicio": "11:00",
-        "duracion": "90",
-        "tipo_proyeccion": "GG",
-        "precio_entrada": 10000.0,
-        "pelicula": "OSWALDO EL MAMAISIMO"
-    },
-    {
-        "nf": 4,
-        "hora_inicio": "10:50",
-        "duracion": "90",
-        "tipo_proyeccion": "3D",
-        "precio_entrada": 500.0,
-        "pelicula": "The Simpsons"
-    },
-    {
-        "nf": 5,
-        "hora_inicio": "10:30",
-        "duracion": "90",
-        "tipo_proyeccion": "3D",
-        "precio_entrada": 600.0,
-        "pelicula": "My Little Pony"
-    },
-    {
-        "nf": 6,
-        "hora_inicio": [
-            "66",
-            "11:11"
-        ],
-        "duracion": "900",
-        "tipo_proyeccion": "ggg",
-        "precio_entrada": 0.0,
-        "pelicula": "VICKY LA CHIDA"
+        "hora_inicio": "22",
+        "duracion": "22",
+        "tipo_proyeccion": "22",
+        "precio_entrada": 22.0,
+        "pelicula": "22",
+        "total_ganancias": 96.80000000000001,
+        "ventas": [
+            {
+                "num_ticket": 0,
+                "can_boletos": 22,
+                "costo_boleto": 22.0,
+                "total_venta": 484.0,
+                "ganancia": 48.400000000000006
+            },
+            {
+                "num_ticket": 1,
+                "can_boletos": 22,
+                "costo_boleto": 22.0,
+                "total_venta": 484.0,
+                "ganancia": 48.400000000000006
+            }
+        ]
     }
 ]

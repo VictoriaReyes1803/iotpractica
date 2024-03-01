@@ -1,9 +1,10 @@
 from Arreglo import Arreglo
 import json
+from Ventas import Ventas
 from Mongo import Mongo
 import pymongo
 class Funciones(Arreglo):
-    def __init__(self,nf=None, hora_inicio=None, duracion=None, tipo_proyeccion=None, precio_entrada=None, pelicula=None):
+    def __init__(self,nf=None, hora_inicio=None, duracion=None, tipo_proyeccion=None, precio_entrada=None, pelicula=None, ventas = None, total_ganancias = None):
         super().__init__()
         self.banderaLista= nf==None and hora_inicio==None and duracion==None 
         if self.banderaLista:  
@@ -17,8 +18,21 @@ class Funciones(Arreglo):
             self.tipo_proyeccion = tipo_proyeccion
             self.precio_entrada = precio_entrada
             self.pelicula = pelicula
-        self.myclient = pymongo.MongoClient( "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+            self.total_ganancias = total_ganancias
+        self.ventas = ventas
+        
+        
+        if self.ventas is None:
+             self.ventas = Ventas()
+        #self.myclient = pymongo.MongoClient( "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
+    
+    def Total_ganancias(self):
+        ganancia_total= 0
+        for funcion in self.arreglo:
+            print( "ganancia: ", funcion.total_ganancias)
+            ganancia_total += funcion.total_ganancias
+        return ganancia_total
     
     def to_dict(self):
 
@@ -33,8 +47,12 @@ class Funciones(Arreglo):
             'duracion': self.duracion,
             'tipo_proyeccion': self.tipo_proyeccion,
             'precio_entrada': self.precio_entrada,
-            'pelicula': self.pelicula
+            'pelicula': self.pelicula,
+            'total_ganancias': self.total_ganancias,
+            'ventas': self.ventas.to_dict()
         }
+    
+
     def __str__(self):
         if not self.banderaLista:
             return f"No. Funcion {self.nf} - Funcion {self.hora_inicio} - Duracion: {self.duracion}\n" \
@@ -86,31 +104,41 @@ class Funciones(Arreglo):
                     s+=f'Función: {funcion}'
             return s 
     
-    
+
     def objetos(self,data):  
         self.arreglo=[] 
         if not data:
                 print("No hay funciones para mostrar")
                 return False
+        fun_list = []
         for funcion_data in data:
-            funcion_instance = Funciones(
+                funcion_instance = Funciones(
                 nf=funcion_data['nf'],
                 hora_inicio=funcion_data['hora_inicio'],
                 duracion=funcion_data['duracion'],
                 tipo_proyeccion=funcion_data['tipo_proyeccion'],
                 precio_entrada=funcion_data['precio_entrada'],
-                pelicula=funcion_data['pelicula']
-            )
-            self.agregar(funcion_instance)
-            
+                pelicula=funcion_data['pelicula'],
+                total_ganancias=funcion_data['total_ganancias']
+                )
+                ventas=Ventas()
+                ventas.objetos_ventas(funcion_data["ventas"])
+                funcion_instance.ventas=ventas
+                fun_list.append(funcion_instance)
+                self.arreglo = fun_list 
 
-        for funcion_instance in self.arreglo:
+        for funcion_instance in fun_list:
             print(f"\t\tFunción {funcion_instance.nf}")
             print(f"\t\tHora de inicio: {funcion_instance.hora_inicio}")
             print(f"\t\tDuración: {funcion_instance.duracion}")
             print(f"\t\tTipo de proyección: {funcion_instance.tipo_proyeccion}")
             print(f"\t\tPrecio de entrada: {funcion_instance.precio_entrada}")
             print(f"\t\tPelícula: {funcion_instance.pelicula}")
+            print(f"\t\tTotal de ganancias: {funcion_instance.total_ganancias}")
+
+            if hasattr(funcion_instance, 'ventas'):
+                print("Ventas:")
+                funcion_instance.ventas.ver()
 
     print("\n")  
   

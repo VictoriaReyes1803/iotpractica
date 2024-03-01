@@ -42,6 +42,7 @@ class Cin:
                 print(f"Formato de pantalla: {sala.formato_pantalla}")
                 print(f"Sistema de sonido: {sala.sonido}")
                 print(f"Tipo de sala: {sala.tipo}")
+                print(f"Total de ganancias: {sala.total_ganancias}")
 
                 if sala.funciones.arreglo:
                     print("\nFunciones:")
@@ -50,6 +51,13 @@ class Cin:
                         print(f"Tipo: {funcion.tipo_proyeccion}")
                         print(f"Precio: {funcion.precio_entrada}")
                         print(f"Película: {funcion.pelicula}")
+                        print(f"Total Ganancias: {funcion.total_ganancias}")
+                        print(f"Ventas: {funcion.ventas}")
+                        if funcion.ventas.arreglo:
+                            print("\nVentas:")
+                            for venta in funcion.ventas.arreglo:
+                                print(f"\nNum Ticket {venta.num_ticket} - Cantidad de Boletos: {venta.can_boletos} - Costo por boleto: {venta.costo_boleto}")
+                                print(f"Total de Venta: {venta.total_venta} - Ganancia: {venta.ganancia}")
 
             print("\n")
 
@@ -66,7 +74,11 @@ class Cin:
         sal.ciclo_menu_salas()
         salas = sal.salas
 
-        cine = Cines(num,nombre, ubi, capacidad, numero_salas, clasificacion, salas)
+        total_ganancias = salas.Total_ganancias_salas()
+        print("TOTAL GANANCIAS\n")
+        print(total_ganancias)
+
+        cine = Cines(num,nombre, ubi, capacidad, numero_salas, clasificacion, salas, total_ganancias=total_ganancias)
         self.cines.agregar(cine)
         print ("********",cine.dictt())
         
@@ -96,25 +108,30 @@ class Cin:
                 num_cine = indice 
                 cine_modificar = self.cines.arreglo[indice]
 
-                print(cine_modificar.salas.mostrartabla()) 
+                print(cine_modificar.salas.mostrartabla())
 
-                cine = Cines(num_cine,nuevo_nombre, nueva_ubi, nueva_capacidad, nuevo_numero_salas, nueva_clasificacion, cine_modificar.salas)  
-                bool = self.cines.modificar(indice, cine)
+                salas = Salas()
+                total_ganancias = salas.Total_ganancias_salas()
+                print("TOTAL GANANCIAS\n")
+                print(total_ganancias) 
+
+                cine = Cines(num_cine,nuevo_nombre, nueva_ubi, nueva_capacidad, nuevo_numero_salas, nueva_clasificacion, cine_modificar.salas, total_ganancias=total_ganancias)  
+                self.cines.modificar(indice, cine)
                 print (cine)
-
-                if self.banderaguardar:
-                    self.cines.guardar_a_json("archivo.json");
-                    print("*****",cine.dictt())
-                    # self.cines.updatemany(indice,cine.dictt())
                
-                if bool:
-                    print("Cine modificado exitosamente.")
-                    modifica_salas = input("¿Desea modificar una sala? (s/n): ")
-                    if modifica_salas.lower() == "s":
+                print("Cine modificado exitosamente.")
+
+                modifica_salas = input("¿Desea modificar una sala? (s/n): ")
+                if modifica_salas.lower() == "s":
                         sal = Sal(cine_modificar.salas)
                         sal.ciclo_menu_salas()
                         cine.salas = sal.salas
-                    return cine
+                
+                if self.banderaguardar:
+                        self.cines.guardar_a_json("archivo.json");
+                        print("*****",cine.dictt())
+                        # self.cines.updatemany(indice,cine.dictt())
+                return cine
             else:
                 print("Índice fuera de rango. Intente nuevamente.")
 

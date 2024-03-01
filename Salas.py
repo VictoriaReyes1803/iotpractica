@@ -5,7 +5,7 @@ import pymongo
 from Mongo import Mongo
 
 class Salas(Arreglo):
-    def __init__(self, numero_sala=None, capacidad=None, formato_pantalla=None, sonido=None, tipo=None, funciones=None):
+    def __init__(self, numero_sala=None, capacidad=None, formato_pantalla=None, sonido=None, tipo=None, funciones=None, total_ganancias=None):
         super().__init__()
         self.banderaLista= numero_sala==None and capacidad==None and formato_pantalla==None 
         if self.banderaLista:  
@@ -19,11 +19,18 @@ class Salas(Arreglo):
         self.sonido = sonido
         self.tipo = tipo
         self.funciones = funciones
+        self.total_ganancias = total_ganancias
         
         if self.funciones is None:
              self.funciones = Funciones()
-        self.myclient = pymongo.MongoClient( "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+        #self.myclient = pymongo.MongoClient( "mongodb+srv://VictoriaReyes:1234567$@cluster0.ti3duhj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
+    def Total_ganancias_salas(self):
+        ganancia_total= 0
+        for sala in self.arreglo:
+            print( "ganancia: ", sala.total_ganancias)
+            ganancia_total += sala.total_ganancias
+        return ganancia_total
     
     def guardar_en_archivo(self):
         nombre_archivo = "salas.json"   
@@ -46,12 +53,11 @@ class Salas(Arreglo):
             print(f"Archivo '{nombre_archivo}' no encontrado. Iniciando con lista vacía.\n")
 
     def mostrartabla(self):
-            s=""
+            x=""
             for sala in self.arreglo:
-                    s+=f'Sala: {sala}'
-            return s 
+                    x+=f'Sala: {sala}'
+            return x
    
-
     def to_dict(self):
     
         if self.banderaLista: 
@@ -65,6 +71,7 @@ class Salas(Arreglo):
             "formato_pantalla": self.formato_pantalla,
             "sonido": self.sonido,
             "tipo": self.tipo,
+            "total_ganancias": self.total_ganancias,
             "funciones":self.funciones.to_dict()
         }
         
@@ -110,7 +117,8 @@ class Salas(Arreglo):
                 capacidad=sala_data['capacidad'],
                 formato_pantalla=sala_data['formato_pantalla'],
                 sonido=sala_data['sonido'],
-                tipo=sala_data['tipo']
+                tipo=sala_data['tipo'],
+                total_ganancias=sala_data['total_ganancias']
             )
 
             # Verificamos si hay funciones en los datos
@@ -123,10 +131,11 @@ class Salas(Arreglo):
 
     def __str__(self):
         if not self.banderaLista:
-                                                return f"Sala {self.numero_sala} - Capacidad: {self.capacidad} personas\n" \
-                                                f"Formato de pantalla: {self.formato_pantalla}\n" \
-                                                f"Sistema de sonido: {self.sonido}\n" \
-                                                f"Tipo de sala: {self.tipo}\n" 
+            return  f"Sala {self.numero_sala} - Capacidad: {self.capacidad} personas\n" \
+                    f"Formato de pantalla: {self.formato_pantalla}\n" \
+                    f"Sistema de sonido: {self.sonido}\n" \
+                    f"Tipo de sala: {self.tipo}\n"\
+                    f"Total de ganancias: {self.total_ganancias}\n"
         else:
                                                 
             result = f"Es un arreglo de({len(self.arreglo)} elementos)"
@@ -143,7 +152,8 @@ class Salas(Arreglo):
                 capacidad=sala_data['capacidad'],
                 formato_pantalla=sala_data['formato_pantalla'],
                 sonido=sala_data['sonido'],
-                tipo=sala_data['tipo']
+                tipo=sala_data['tipo'],
+                total_ganancias=sala_data['total_ganancias']
                 )
                 funciones=Funciones()
                 funciones.objetos(sala_data["funciones"])
@@ -154,6 +164,7 @@ class Salas(Arreglo):
         for sala_instance in sala_list:
             print(f"\tSala {sala_instance.numero_sala} - Capacidad: {sala_instance.capacidad}")
             print(f"\tFormato de pantalla: {sala_instance.formato_pantalla} - Sonido: {sala_instance.sonido} - Tipo: {sala_instance.tipo}")
+            print(f"\tTotal de ganancias: {sala_instance.total_ganancias}") 
 
             if hasattr(sala_instance, 'funciones'):
                 print("Funciones:")
