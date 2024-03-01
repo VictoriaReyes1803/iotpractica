@@ -150,5 +150,22 @@
                 "pelicula": "88"
             }
         ]
+    },
+    {
+        "numero_sala": 8,
+        "capacidad": 6,
+        "formato_pantalla": "666",
+        "sonido": "66",
+        "tipo": "66",
+        "funciones": [
+            {
+                "nf": 0,
+                "hora_inicio": "5",
+                "duracion": "55",
+                "tipo_proyeccion": "55",
+                "precio_entrada": 55.0,
+                "pelicula": "55"
+            }
+        ]
     }
 ]

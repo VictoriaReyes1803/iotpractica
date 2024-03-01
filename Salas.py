@@ -37,13 +37,19 @@ class Salas(Arreglo):
         nombre_archivo = "salas.json"
         try:
             data = self.readjson(nombre_archivo)
-            self.mongo = Mongo(db="basededates")
-            for sala_data in data:
-                    self.mongo.insert_one("Salas", sala_data)
+            # self.mongo = Mongo(db="basededates")
+            # for sala_data in data:
+            #         self.mongo.insert_one("Salas", sala_data)
             self.cargar_desde_diccionario(data)
             print(f"\nDatos cargados desde '{nombre_archivo}'\n")
         except FileNotFoundError:
             print(f"Archivo '{nombre_archivo}' no encontrado. Iniciando con lista vacía.\n")
+
+    def mostrartabla(self):
+            s=""
+            for sala in self.arreglo:
+                    s+=f'Sala: {sala}'
+            return s 
    
 
     def to_dict(self):

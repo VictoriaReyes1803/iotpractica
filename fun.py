@@ -29,8 +29,8 @@ class fun():
         
         if self.banderaguardar:
             self.funciones.guardar_en_archivo("funciones.json")
-            self.mongo = Mongo(db="basededates")
-            self.mongo.insert_one("Funciones", nueva_funcion.to_dict())
+            # self.mongo = Mongo(db="basededates")
+            # self.mongo.insert_one("Funciones", nueva_funcion.to_dict())
 
 
         print(f"\nFunción {pelicula} agregada exitosamente!\n")
@@ -46,9 +46,9 @@ class fun():
                     print(f"Pelicula: {funcion.pelicula}")
 
             print("\n")
-            self.mongo = Mongo(db="basededates")
-            resultados = self.mongo.find("Funciones")
-            print("Funciones encontradas en MONGO:", resultados)
+            # self.mongo = Mongo(db="basededates")
+            # resultados = self.mongo.find("Funciones")
+            # print("Funciones encontradas en MONGO:", resultados)
             self.funciones.ver()
         else:
             print("Error: No se han cargado las funciones.")
@@ -59,7 +59,7 @@ class fun():
         indice = int(input("Ingrese el índice de la función a modificar: "))
         if 0 <= indice < len(self.funciones.arreglo):
             nueva_hora_inicio = input("Nueva hora de inicio: ") if input("Desea modificar la hora de inicio? (s/n): ") == "s" else self.funciones.arreglo[indice].hora_inicio
-            nueva_duracion = input("Nueva duración: ") if input("Desea modificar la duración? (s/n): ") == "s" else self.funciones.arreglo[indice].duracion
+            nueva_duracion = input("Nueva duración: ") if input("Desea modificar la duración? (s/n): ") == "s"  else self.funciones.arreglo[indice].duracion
             nuevo_tipo_proyeccion = input("Nuevo tipo de proyección: ") if input("Desea modificar el tipo de proyección? (s/n): ") == "s" else self.funciones.arreglo[indice].tipo_proyeccion
             nuevo_precio_entrada = float(input("Nuevo precio de entrada: ")) if input("Desea modificar el precio de entrada? (s/n): ") == "s" else self.funciones.arreglo[indice].precio_entrada
             nueva_pelicula = input("Nuevo nombre de la película: ") if input("Desea modificar el nombre de la película? (s/n): ") == "s" else self.funciones.arreglo[indice].pelicula
@@ -73,12 +73,7 @@ class fun():
 
             if self.banderaguardar:
                 self.funciones.guardar_en_archivo("funciones.json")
-                self.funciones.updateMongo(indice, "hora_inicio", nueva_hora_inicio)
-                self.funciones.updateMongo(indice, "duracion", nueva_duracion)
-                self.funciones.updateMongo(indice, "tipo_proyeccion", nuevo_tipo_proyeccion)
-                self.funciones.updateMongo(indice, "precio_entrada", nuevo_precio_entrada)
-                self.funciones.updateMongo(indice, "pelicula", nueva_pelicula)
-
+               
             print(f"\nFunción modificada exitosamente!\n")
         else:
             print("Índice fuera de rango. Intente nuevamente.")
@@ -91,7 +86,7 @@ class fun():
             self.funciones.nf = len(self.funciones.arreglo)
             if self.banderaguardar:
                 self.funciones.guardar_en_archivo("funciones.json")
-                self.funciones.deleteOneMongo(indice)
+                # self.funciones.deleteOneMongo(indice)
             print(f"\nFunción eliminada exitosamente!\n")
         else:
             print("Índice fuera de rango. Intente nuevamente.")
@@ -118,8 +113,8 @@ class fun():
                 self.eliminar_funcion()
             elif opcion == "5":
                 if self.banderaguardar:
-                    self.funciones.deleteCollection()
-                print("Hasta Luego!")
+                    # self.funciones.deleteCollection()
+                    print("Hasta Luego!")
                 break
             else:
                 print("Opción inválida. Intente nuevamente.")

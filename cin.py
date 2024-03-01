@@ -72,8 +72,8 @@ class Cin:
         
         if self.banderaguardar:
             self.cines.guardar_a_json("archivo.json");
-            self.mongo = Mongo(db="basededates")
-            self.mongo.insert_one("Cines", cine.dictt())
+            # self.mongo = Mongo(db="basededates")
+            # self.mongo.insert_one("Cines", cine.dictt())
             
         
         print("Cine agregado exitosamente.")
@@ -96,34 +96,24 @@ class Cin:
                 num_cine = indice 
                 cine_modificar = self.cines.arreglo[indice]
 
-                salass = Salas()
-                for sala in cine_modificar.salas.arreglo:
-                    salass.agregar(sala)
-                
-                print("salass:")
-                for sala in salass.arreglo:
-                    print(sala)
+                print(cine_modificar.salas.mostrartabla()) 
 
-                cine = Cines(num_cine,nuevo_nombre, nueva_ubi, nueva_capacidad, nuevo_numero_salas, nueva_clasificacion, salass)
+                cine = Cines(num_cine,nuevo_nombre, nueva_ubi, nueva_capacidad, nuevo_numero_salas, nueva_clasificacion, cine_modificar.salas)  
                 bool = self.cines.modificar(indice, cine)
                 print (cine)
 
                 if self.banderaguardar:
                     self.cines.guardar_a_json("archivo.json");
                     print("*****",cine.dictt())
-                    self.cines.updatemany(indice,cine.dictt())
+                    # self.cines.updatemany(indice,cine.dictt())
+               
                 if bool:
                     print("Cine modificado exitosamente.")
                     modifica_salas = input("¿Desea modificar una sala? (s/n): ")
                     if modifica_salas.lower() == "s":
-                        sal = Sal(salass)
+                        sal = Sal(cine_modificar.salas)
                         sal.ciclo_menu_salas()
                         cine.salas = sal.salas
-
-                        if self.banderaguardar:
-                            self.cines.guardar_a_json("archivo.json");
-                            print(cine.dictt())
-                            self.cines.updatecine(indice,cine)
                     return cine
             else:
                 print("Índice fuera de rango. Intente nuevamente.")
@@ -136,7 +126,7 @@ class Cin:
             self.cines.eliminar(indice)
             if self.banderaguardar:
                 self.cines.guardar_a_json("archivo.json");
-                self.cines.deleteOneMongo(indice)
+                # self.cines.deleteOneMongo(indice)
         
             print("Cine eliminado exitosamente.")
         else:
@@ -156,8 +146,8 @@ class Cin:
             elif opcion == "4":
                 self.eliminar_cine()
             elif opcion == "5":
-                if self.banderaguardar:
-                    self.cines.deleteCollection()
+                # if self.banderaguardar:
+                #     self.cines.deleteCollection()
                 print("¡Hasta luego!")
                 break
             else:

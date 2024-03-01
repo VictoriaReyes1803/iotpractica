@@ -122,9 +122,9 @@ class Cines(Arreglo):
         try:
             with open(nombre_archivo, 'r') as archivo:
                 data = json.load(archivo)
-                self.mongo = Mongo(db="basededates")
-                for cine_data in data:
-                    self.mongo.insert_one("Cines", cine_data)
+                # self.mongo = Mongo(db="basededates")
+                # for cine_data in data:
+                #     self.mongo.insert_one("Cines", cine_data)
 
                 self.cargar_desde_diccionario(data)
                 print(f"\nDatos cargados desde '{nombre_archivo}'\n")

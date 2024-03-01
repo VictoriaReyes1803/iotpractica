@@ -80,6 +80,13 @@ class Funciones(Arreglo):
     def deleteCollection (self):
         self.mongo.delete_many(self.myclient,"basededates","Funciones")
 
+    def mostrartabla(self):
+            s=""
+            for funcion in self.arreglo:
+                    s+=f'Función: {funcion}'
+            return s 
+    
+    
     def objetos(self,data):  
         self.arreglo=[] 
         if not data:
@@ -110,9 +117,9 @@ class Funciones(Arreglo):
     def cargar_desde_archivo(self,nombre_archivo):
         try:
             data = self.readjson(nombre_archivo)
-            self.mongo = Mongo(db="basededates")
-            for cine_data in data:
-                    self.mongo.insert_one("Funciones", cine_data)
+            # self.mongo = Mongo(db="basededates")
+            # for cine_data in data:
+            #         self.mongo.insert_one("Funciones", cine_data)
             self.objetos(data)
             print(f"\nDatos cargados desde '{nombre_archivo}'\n")
         except FileNotFoundError:

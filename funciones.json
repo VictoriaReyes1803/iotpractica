@@ -49,7 +49,10 @@
     },
     {
         "nf": 6,
-        "hora_inicio": "11:11",
+        "hora_inicio": [
+            "66",
+            "11:11"
+        ],
         "duracion": "900",
         "tipo_proyeccion": "ggg",
         "precio_entrada": 0.0,
